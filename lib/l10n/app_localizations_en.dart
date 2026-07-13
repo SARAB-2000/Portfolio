@@ -150,6 +150,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get visitLiveSite => 'Visit Live Site';
 
   @override
+  String get projectGallery => 'Screenshots';
+
+  @override
   String get previousProject => 'Previous';
 
   @override

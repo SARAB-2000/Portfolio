@@ -95,16 +95,7 @@ class _ProjectCard extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (project.imageAsset.isNotEmpty)
-                AspectRatio(
-                  aspectRatio: 16 / 9,
-                  child: Image.asset(
-                    project.imageAsset,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) => Container(
-                      color: project.color.withValues(alpha: 0.15),
-                    ),
-                  ),
-                ),
+                _ProjectCoverImage(project: project),
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -237,5 +228,52 @@ class _ProjectCard extends StatelessWidget {
         .animate()
         .fadeIn(delay: (index * 100).ms)
         .slideY(begin: 0.2, end: 0, delay: (index * 100).ms);
+  }
+}
+
+class _ProjectCoverImage extends StatelessWidget {
+  const _ProjectCoverImage({required this.project});
+
+  final ProjectItem project;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.colors;
+
+    if (project.portraitCover) {
+      return Container(
+        height: 260,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              project.color.withValues(alpha: 0.18),
+              colors.surface,
+            ],
+          ),
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 48),
+        child: Image.asset(
+          project.imageAsset,
+          fit: BoxFit.contain,
+          errorBuilder: (context, error, stackTrace) => Container(
+            color: project.color.withValues(alpha: 0.15),
+          ),
+        ),
+      );
+    }
+
+    return AspectRatio(
+      aspectRatio: 16 / 9,
+      child: Image.asset(
+        project.imageAsset,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) => Container(
+          color: project.color.withValues(alpha: 0.15),
+        ),
+      ),
+    );
   }
 }

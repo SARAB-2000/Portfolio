@@ -31,17 +31,12 @@ class ProjectDetailScreen extends StatelessWidget {
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            expandedHeight: isWide ? 420 : 280,
             pinned: true,
-            stretch: true,
             backgroundColor: colors.background,
+            surfaceTintColor: Colors.transparent,
             leading: IconButton(
               icon: Icon(Icons.arrow_back, color: colors.textPrimary),
               onPressed: () => Navigator.of(context).pop(),
-            ),
-            flexibleSpace: FlexibleSpaceBar(
-              stretchModes: const [StretchMode.zoomBackground],
-              background: _HeroBanner(project: project),
             ),
           ),
           SliverToBoxAdapter(
@@ -113,6 +108,10 @@ class ProjectDetailScreen extends StatelessWidget {
                       );
                     }).toList(),
                   ),
+                  if (project.allImageAssets.isNotEmpty) ...[
+                    const SizedBox(height: 32),
+                    _ProjectImageSlider(project: project, l10n: l10n),
+                  ],
                   const SizedBox(height: 40),
                   if (isWide)
                     Row(
@@ -150,58 +149,207 @@ class ProjectDetailScreen extends StatelessWidget {
   }
 }
 
-class _HeroBanner extends StatelessWidget {
-  const _HeroBanner({required this.project});
+class _ProjectImageSlider extends StatelessWidget {
+  const _ProjectImageSlider({
+    required this.project,
+    required this.l10n,
+  });
 
   final ProjectItem project;
+  final AppLocalizations l10n;
 
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        if (project.imageAsset.isNotEmpty)
-          Image.asset(
-            project.imageAsset,
-            fit: BoxFit.cover,
-            errorBuilder: (_, __, ___) => _gradientFallback(context),
-          )
-        else
-          _gradientFallback(context),
-        Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Colors.transparent,
-                context.colors.background.withValues(alpha: 0.9),
-              ],
-            ),
-          ),
-        ),
-      ],
+  void _openPreviewModal(BuildContext context, int initialIndex) {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: true,
+      barrierColor: Colors.black.withValues(alpha: 0.72),
+      builder: (dialogContext) {
+        return _ImagePreviewModal(
+          images: project.allImageAssets,
+          initialIndex: initialIndex,
+          projectColor: project.color,
+        );
+      },
     );
   }
 
-  Widget _gradientFallback(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            project.color.withValues(alpha: 0.4),
-            project.color.withValues(alpha: 0.1),
-            context.colors.background,
-          ],
+  Widget _buildThumbnail(BuildContext context, String asset) {
+    return Image.asset(
+      asset,
+      fit: BoxFit.cover,
+      errorBuilder: (context, error, stackTrace) => Container(
+        color: project.color.withValues(alpha: 0.1),
+        alignment: Alignment.center,
+        child: Icon(
+          Icons.broken_image_outlined,
+          color: context.colors.textSecondary,
         ),
       ),
-      child: Center(
-        child: Icon(
-          Icons.layers,
-          size: 120,
-          color: project.color.withValues(alpha: 0.5),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.colors;
+    final images = project.allImageAssets;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          l10n.projectGallery,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
+        ),
+        const SizedBox(height: 16),
+        SizedBox(
+          height: 80,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: images.length,
+            separatorBuilder: (context, index) => const SizedBox(width: 10),
+            itemBuilder: (context, index) {
+              return Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () => _openPreviewModal(context, index),
+                  borderRadius: BorderRadius.circular(10),
+                  child: Ink(
+                    width: 120,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: colors.border),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(9),
+                      child: _buildThumbnail(context, images[index]),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    ).animate().fadeIn(delay: 200.ms);
+  }
+}
+
+class _ImagePreviewModal extends StatefulWidget {
+  const _ImagePreviewModal({
+    required this.images,
+    required this.initialIndex,
+    required this.projectColor,
+  });
+
+  final List<String> images;
+  final int initialIndex;
+  final Color projectColor;
+
+  @override
+  State<_ImagePreviewModal> createState() => _ImagePreviewModalState();
+}
+
+class _ImagePreviewModalState extends State<_ImagePreviewModal> {
+  late int _index;
+
+  @override
+  void initState() {
+    super.initState();
+    _index = widget.initialIndex;
+  }
+
+  void _goPrev() {
+    setState(() {
+      _index = (_index - 1 + widget.images.length) % widget.images.length;
+    });
+  }
+
+  void _goNext() {
+    setState(() {
+      _index = (_index + 1) % widget.images.length;
+    });
+  }
+
+  bool get _isRtl => Directionality.of(context) == TextDirection.rtl;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.colors;
+    final size = MediaQuery.sizeOf(context);
+    final maxWidth = (size.width - 48).clamp(280.0, 960.0);
+    final maxHeight = size.height * 0.75;
+
+    return Dialog(
+      backgroundColor: colors.surface,
+      insetPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Align(
+              alignment: AlignmentDirectional.topEnd,
+              child: IconButton(
+                onPressed: () => Navigator.of(context).pop(),
+                icon: const Icon(Icons.close),
+              ),
+            ),
+            Flexible(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.asset(
+                    widget.images[_index],
+                    fit: BoxFit.contain,
+                    errorBuilder: (context, error, stackTrace) => SizedBox(
+                      height: 200,
+                      child: Center(
+                        child: Icon(
+                          Icons.broken_image_outlined,
+                          color: colors.textSecondary,
+                          size: 48,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.fromLTRB(8, 8, 8, 12),
+              decoration: BoxDecoration(
+                border: Border(top: BorderSide(color: colors.border)),
+              ),
+              child: Row(
+                children: [
+                  IconButton(
+                    onPressed: widget.images.length > 1 ? _goPrev : null,
+                    icon: Icon(_isRtl ? Icons.chevron_right : Icons.chevron_left),
+                  ),
+                  Expanded(
+                    child: Text(
+                      '${_index + 1} / ${widget.images.length}',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: colors.textSecondary,
+                        fontWeight: FontWeight.w600,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: widget.images.length > 1 ? _goNext : null,
+                    icon: Icon(_isRtl ? Icons.chevron_left : Icons.chevron_right),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

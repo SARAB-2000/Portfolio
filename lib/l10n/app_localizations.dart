@@ -380,6 +380,12 @@ abstract class AppLocalizations {
   /// **'Visit Live Site'**
   String get visitLiveSite;
 
+  /// No description provided for @projectGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'Screenshots'**
+  String get projectGallery;
+
   /// No description provided for @previousProject.
   ///
   /// In en, this message translates to:

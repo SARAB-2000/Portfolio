@@ -154,6 +154,9 @@ class AppLocalizationsFa extends AppLocalizations {
   String get visitLiveSite => 'مشاهده سایت';
 
   @override
+  String get projectGallery => 'تصاویر';
+
+  @override
   String get previousProject => 'قبلی';
 
   @override

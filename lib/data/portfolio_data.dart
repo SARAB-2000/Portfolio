@@ -72,7 +72,9 @@ class ProjectItem {
     required this.myRole,
     required this.duration,
     this.imageAsset = '',
+    this.galleryAssets = const [],
     this.isFeatured = false,
+    this.portraitCover = false,
   });
 
   final String id;
@@ -89,7 +91,22 @@ class ProjectItem {
   final L myRole;
   final L duration;
   final String imageAsset;
+  final List<String> galleryAssets;
   final bool isFeatured;
+  /// Use for mobile/portrait screenshots — shows full image with letterboxing.
+  final bool portraitCover;
+
+  /// Cover image first, then gallery — deduplicated.
+  List<String> get allImageAssets {
+    final images = <String>[];
+    if (imageAsset.isNotEmpty) images.add(imageAsset);
+    for (final asset in galleryAssets) {
+      if (asset.isNotEmpty && !images.contains(asset)) {
+        images.add(asset);
+      }
+    }
+    return images;
+  }
 }
 
 class SkillGroup {
@@ -213,6 +230,117 @@ class PortfolioData {
 
   static const projects = [
     ProjectItem(
+      id: 'product-tracking',
+      title: L('Product Tracking System', 'سامانه رهگیری محصولات'),
+      description: L(
+        'End-to-end barcode tracking from production line to warehouse, distribution, and returns — with full analytics.',
+        'رهگیری end-to-end بارکد از خط تولید تا انبار، توزیع و مرجوعی — با آمارگیری کامل.',
+      ),
+      category: L('Enterprise Web App', 'سامانه وب سازمانی'),
+      tags: ['Django', 'Redis', 'Celery', 'MySQL'],
+      color: Color(0xFF0D9488),
+      url: 'https://github.com/sarab-2000',
+      overview: L(
+        'A comprehensive product traceability platform for manufacturing operations. The system generates unique 2D barcodes for each product unit based on product type and attributes, sends them to industrial Jet Printers for on-product labeling, and uses camera scanning on the production line. When the configured number of units per carton is reached, it automatically generates a unique master carton barcode and sends it to a label printer. Warehouse, distribution, and returns departments update product status by scanning these barcodes, with full reporting and analytics built in.',
+        'پلتفرم جامع ردیابی محصول برای عملیات تولید. برای هر واحد محصول بر اساس نوع و مشخصات، بارکد دوبعدی یونیک تولید می‌کند و به Jet Printer صنعتی برای چاپ روی محصول ارسال می‌کند. با اسکن دوربین در خط تولید، وقتی به تعداد تعریف‌شده در هر کارتن رسید، بارکد مادر یونیک کارتن ساخته و به label printer داده می‌شود. بخش‌های انبار، توزیع و مرجوعی با اسکن بارکدها وضعیت را به‌روز می‌کنند و گزارش‌گیری و آمار کامل در دسترس است.',
+      ),
+      challenge: L(
+        'Tracking products manually across production, packaging, warehouse, distribution, and returns caused labeling errors, lost inventory visibility, and no single source of truth for product status.',
+        'رهگیری دستی محصول در تولید، بسته‌بندی، انبار، توزیع و مرجوعی باعث خطای لیبل، از دست رفتن دید موجودی و نبود منبع واحد برای وضعیت محصول می‌شد.',
+      ),
+      solution: L(
+        'Built with Django, Redis, Celery, and MySQL — dynamic QR/barcode generation rules per product type, Jet Printer and label printer integrations, camera-based scanning workflows, automatic master carton barcode creation when unit count per carton is met, and status management modules for warehouse, distribution, and returns with comprehensive analytics dashboards.',
+        'با Django، Redis، Celery و MySQL — قوانین پویا برای تولید QR/بارکد بر اساس نوع محصول، اتصال Jet Printer و label printer، گردش کار اسکن با دوربین، ساخت خودکار بارکد مادر کارتن در رسیدن به تعداد واحد، و ماژول‌های وضعیت برای انبار، توزیع و مرجوعی همراه داشبورد آمار.',
+      ),
+      results: L(
+        'Full traceability from production to returns, automated unit and carton labeling, real-time status updates across departments, and complete reporting for operational decisions.',
+        'ردیابی کامل از تولید تا مرجوعی، لیبل‌گذاری خودکار واحد و کارتن، به‌روزرسانی لحظه‌ای وضعیت بین بخش‌ها، و گزارش‌گیری کامل برای تصمیم‌گیری عملیاتی.',
+      ),
+      myRole: L('Full-Stack Developer', 'توسعه‌دهنده فول‌استک'),
+      duration: L('Production system', 'سیستم عملیاتی'),
+      imageAsset: 'assets/images/projects/tracking1.jpg',
+      galleryAssets: [
+        'assets/images/projects/tracking2.jpg',
+        'assets/images/projects/tracking3.jpg',
+        'assets/images/projects/tracking4.jpg',
+      ],
+      isFeatured: true,
+    ),
+    ProjectItem(
+      id: 'ai-language-learning',
+      title: L('AI Language Learning Platform', 'پلتفرم یادگیری زبان با هوش مصنوعی'),
+      description: L(
+        'Django backend for an AI-powered language learning app — custom courses, chat assistants, and creator monetization.',
+        'بک‌اند Django برای اپ یادگیری زبان با AI — دوره سفارشی، دستیار چت و درآمدزایی برای سازندگان.',
+      ),
+      category: L('EdTech Platform', 'پلتفرم آموزشی'),
+      tags: ['Django', 'AI APIs', 'REST API', 'MySQL'],
+      color: Color(0xFF6366F1),
+      url: 'https://github.com/sarab-2000',
+      overview: L(
+        'Backend platform for an AI-driven language learning application. Users can create structured language courses — comprehensive programs, grammar, reading, and more — and attach intelligent assistants to each course. Assistant bots answer learner questions via chat about course content, while specialized teaching bots can drill vocabulary, grammar, and other skills. Other users discover and enroll in published courses and bots. The platform includes a monetization system so course and bot creators can earn revenue from their content.',
+        'بک‌اند پلتفرم اپ یادگیری زبان مبتنی بر هوش مصنوعی. کاربران دوره‌های ساختاریافته می‌سازند — دوره جامع، گرامر، ریدینگ و ... — و به هر دوره دستیار هوشمند تعیین می‌کنند. ربات دستیار در قالب چت به سوالات یادگیرندگان درباره محتوای دوره پاسخ می‌دهد؛ ربات‌های آموزشی هم برای کار روی لغات، گرامر و مهارت‌های دیگر ساخته می‌شوند. سایر کاربران دوره‌ها و ربات‌ها را کشف و استفاده می‌کنند. سیستم درآمدزایی برای سازندگان دوره و ربات هم پیاده‌سازی شده است.',
+      ),
+      challenge: L(
+        'Language learners needed personalized, interactive content beyond static lessons — and educators lacked a platform to build, share, and monetize AI-enhanced courses without building everything from scratch.',
+        'زبان‌آموزان به محتوای تعاملی و شخصی‌سازی‌شده فراتر از درس‌های ثابت نیاز داشتند — و مدرسان پلتفرمی برای ساخت، اشتراک و درآمدزایی از دوره‌های AI-enhanced بدون ساخت همه‌چیز از صفر نداشتند.',
+      ),
+      solution: L(
+        'Built the backend with Django and integrated AI APIs for conversational assistants and teaching bots. Implemented course creation workflows (comprehensive, grammar, reading, etc.), per-course chat assistants, specialized bots for vocabulary and grammar practice, user enrollment, and a creator monetization engine — enabling a marketplace-style learning ecosystem.',
+        'بک‌اند با Django و یکپارچه‌سازی AI API برای دستیار مکالمه‌ای و ربات‌های آموزشی. گردش کار ساخت دوره (جامع، گرامر، ریدینگ و ...)، دستیار چت برای هر دوره، ربات‌های تخصصی لغت و گرامر، ثبت‌نام کاربران و موتور درآمدزایی سازندگان — اکوسیستم یادگیری شبیه marketplace.',
+      ),
+      results: L(
+        'Creators can publish courses and bots, learners get AI-powered interactive tutoring, and the monetization layer supports sustainable content creation on the platform.',
+        'سازندگان دوره و ربات منتشر می‌کنند، یادگیرندگان آموزش تعاملی با AI می‌گیرند و لایه درآمدزایی خلق محتوای پایدار را پشتیبانی می‌کند.',
+      ),
+      myRole: L('Backend Developer', 'توسعه‌دهنده بک‌اند'),
+      duration: L('Multi-phase', 'چند فازی'),
+      imageAsset: 'assets/images/projects/talkook1.png',
+      galleryAssets: [
+        'assets/images/projects/talkook2.png',
+        'assets/images/projects/talkook3.png',
+        'assets/images/projects/talkook4.png',
+      ],
+      isFeatured: true,
+    ),
+    ProjectItem(
+      id: 'supishi-mission-forms',
+      title: L('Supishi — Mission Form Digitization', 'Supishi — الکترونیکی‌سازی فرم مأموریت'),
+      description: L(
+        'Django web platform digitizing field mission forms — multi-step approval workflow with SMS notifications and full reporting.',
+        'پلتفرم وب Django برای دیجیتالی‌سازی فرم مأموریت — گردش تأیید چندمرحله‌ای با SMS و گزارش‌گیری کامل.',
+      ),
+      category: L('Business Web App', 'سامانه وب سازمانی'),
+      tags: ['Django', 'SMS API', 'Workflow', 'Reporting'],
+      color: Color(0xFF8B5CF6),
+      url: 'https://supishi.net',
+      overview: L(
+        'A Django-powered web platform that replaces paper-based mission forms for field operations. When company staff go on missions and inspect client equipment, they fill out digital forms for each device and submit them. An SMS is automatically sent to the client company manager with the form details for review and approval. Once approved, the form moves to the support manager to register and confirm costs. Finally, the department manager reviews all information and, if correct, gives final approval and archives the form. The system includes comprehensive reporting on forms, missions, companies, submitters, and more.',
+        'پلتفرم وب Django که فرم‌های کاغذی مأموریت را در عملیات میدانی جایگزین می‌کند. وقتی نیروهای شرکت مأموریت می‌روند و تجهیزات مشتری را بازدید می‌کنند، فرم دیجیتال برای هر دستگاه پر و ثبت می‌کنند. پیامک خودکار به مسئول شرکت مشتری با جزئیات فرم ارسال می‌شود تا بخواند و تأیید کند. پس از تأیید، فرم به مسئول پشتیبانی می‌رود تا هزینه‌ها را ثبت و تأیید کند. در نهایت مدیر بخش همه اطلاعات را بررسی و در صورت صحت، تأیید نهایی و بایگانی می‌کند. گزارش‌گیری کامل از فرم‌ها، مأموریت‌ها، شرکت‌ها، ثبت‌کنندگان و ... وجود دارد.',
+      ),
+      challenge: L(
+        'Paper mission forms caused delays, lost documents, no audit trail, and a slow multi-party approval chain between field staff, client managers, support, and department heads.',
+        'فرم‌های کاغذی مأموریت باعث تأخیر، گم شدن مدارک، نبود audit trail و زنجیره تأیید کند بین نیروی میدانی، مدیر مشتری، پشتیبانی و مدیر بخش می‌شد.',
+      ),
+      solution: L(
+        'Built with Django — digital form submission per device during missions, automated SMS notifications to client managers, staged approval workflow (client → support costs → department manager → archive), role-based access, and rich reporting dashboards filtered by forms, missions, companies, and staff.',
+        'با Django — ثبت فرم دیجیتال برای هر دستگاه در مأموریت، اعلان SMS خودکار به مدیر مشتری، گردش تأیید مرحله‌ای (مشتری ← هزینه پشتیبانی ← مدیر بخش ← بایگانی)، دسترسی نقش‌محور و داشبورد گزارش بر اساس فرم، مأموریت، شرکت و پرسنل.',
+      ),
+      results: L(
+        'Paperless mission documentation, faster approvals via SMS-triggered client sign-off, traceable workflow at every stage, and complete analytics for operations management.',
+        'مستندسازی بدون کاغذ مأموریت، تأیید سریع‌تر با SMS مشتری، گردش کار قابل ردیابی در هر مرحله، و آمار کامل برای مدیریت عملیات.',
+      ),
+      myRole: L('Full-Stack Developer', 'توسعه‌دهنده فول‌استک'),
+      duration: L('Production system', 'سیستم عملیاتی'),
+      imageAsset: 'assets/images/projects/supishi1.png',
+      galleryAssets: [
+        'assets/images/projects/supishi2.png',
+        'assets/images/projects/supishi3.png',
+        'assets/images/projects/supishi4.png',
+      ],
+      isFeatured: true,
+    ),
+    ProjectItem(
       id: 'developer-portfolio',
       title: L('Developer Portfolio Website', 'وب‌سایت پورتفولیو شخصی'),
       description: L(
@@ -245,102 +373,6 @@ class PortfolioData {
       isFeatured: true,
     ),
     ProjectItem(
-      id: 'product-tracking',
-      title: L('Product Tracking System', 'سامانه رهگیری محصولات'),
-      description: L(
-        'End-to-end barcode tracking from production line to warehouse, distribution, and returns — with full analytics.',
-        'رهگیری end-to-end بارکد از خط تولید تا انبار، توزیع و مرجوعی — با آمارگیری کامل.',
-      ),
-      category: L('Enterprise Web App', 'سامانه وب سازمانی'),
-      tags: ['Django', 'Redis', 'Celery', 'MySQL'],
-      color: Color(0xFF0D9488),
-      url: 'https://github.com/sarab-2000',
-      overview: L(
-        'A comprehensive product traceability platform for manufacturing operations. The system generates unique 2D barcodes for each product unit based on product type and attributes, sends them to industrial Jet Printers for on-product labeling, and uses camera scanning on the production line. When the configured number of units per carton is reached, it automatically generates a unique master carton barcode and sends it to a label printer. Warehouse, distribution, and returns departments update product status by scanning these barcodes, with full reporting and analytics built in.',
-        'پلتفرم جامع ردیابی محصول برای عملیات تولید. برای هر واحد محصول بر اساس نوع و مشخصات، بارکد دوبعدی یونیک تولید می‌کند و به Jet Printer صنعتی برای چاپ روی محصول ارسال می‌کند. با اسکن دوربین در خط تولید، وقتی به تعداد تعریف‌شده در هر کارتن رسید، بارکد مادر یونیک کارتن ساخته و به label printer داده می‌شود. بخش‌های انبار، توزیع و مرجوعی با اسکن بارکدها وضعیت را به‌روز می‌کنند و گزارش‌گیری و آمار کامل در دسترس است.',
-      ),
-      challenge: L(
-        'Tracking products manually across production, packaging, warehouse, distribution, and returns caused labeling errors, lost inventory visibility, and no single source of truth for product status.',
-        'رهگیری دستی محصول در تولید، بسته‌بندی، انبار، توزیع و مرجوعی باعث خطای لیبل، از دست رفتن دید موجودی و نبود منبع واحد برای وضعیت محصول می‌شد.',
-      ),
-      solution: L(
-        'Built with Django, Redis, Celery, and MySQL — dynamic QR/barcode generation rules per product type, Jet Printer and label printer integrations, camera-based scanning workflows, automatic master carton barcode creation when unit count per carton is met, and status management modules for warehouse, distribution, and returns with comprehensive analytics dashboards.',
-        'با Django، Redis، Celery و MySQL — قوانین پویا برای تولید QR/بارکد بر اساس نوع محصول، اتصال Jet Printer و label printer، گردش کار اسکن با دوربین، ساخت خودکار بارکد مادر کارتن در رسیدن به تعداد واحد، و ماژول‌های وضعیت برای انبار، توزیع و مرجوعی همراه داشبورد آمار.',
-      ),
-      results: L(
-        'Full traceability from production to returns, automated unit and carton labeling, real-time status updates across departments, and complete reporting for operational decisions.',
-        'ردیابی کامل از تولید تا مرجوعی، لیبل‌گذاری خودکار واحد و کارتن، به‌روزرسانی لحظه‌ای وضعیت بین بخش‌ها، و گزارش‌گیری کامل برای تصمیم‌گیری عملیاتی.',
-      ),
-      myRole: L('Full-Stack Developer', 'توسعه‌دهنده فول‌استک'),
-      duration: L('Production system', 'سیستم عملیاتی'),
-      imageAsset: 'assets/images/projects/product-tracking.jpg',
-      isFeatured: true,
-    ),
-    ProjectItem(
-      id: 'ai-language-learning',
-      title: L('AI Language Learning Platform', 'پلتفرم یادگیری زبان با هوش مصنوعی'),
-      description: L(
-        'Django backend for an AI-powered language learning app — custom courses, chat assistants, and creator monetization.',
-        'بک‌اند Django برای اپ یادگیری زبان با AI — دوره سفارشی، دستیار چت و درآمدزایی برای سازندگان.',
-      ),
-      category: L('EdTech Platform', 'پلتفرم آموزشی'),
-      tags: ['Django', 'AI APIs', 'REST API', 'MySQL'],
-      color: Color(0xFF6366F1),
-      url: 'https://github.com/sarab-2000',
-      overview: L(
-        'Backend platform for an AI-driven language learning application. Users can create structured language courses — comprehensive programs, grammar, reading, and more — and attach intelligent assistants to each course. Assistant bots answer learner questions via chat about course content, while specialized teaching bots can drill vocabulary, grammar, and other skills. Other users discover and enroll in published courses and bots. The platform includes a monetization system so course and bot creators can earn revenue from their content.',
-        'بک‌اند پلتفرم اپ یادگیری زبان مبتنی بر هوش مصنوعی. کاربران دوره‌های ساختاریافته می‌سازند — دوره جامع، گرامر، ریدینگ و ... — و به هر دوره دستیار هوشمند تعیین می‌کنند. ربات دستیار در قالب چت به سوالات یادگیرندگان درباره محتوای دوره پاسخ می‌دهد؛ ربات‌های آموزشی هم برای کار روی لغات، گرامر و مهارت‌های دیگر ساخته می‌شوند. سایر کاربران دوره‌ها و ربات‌ها را کشف و استفاده می‌کنند. سیستم درآمدزایی برای سازندگان دوره و ربات هم پیاده‌سازی شده است.',
-      ),
-      challenge: L(
-        'Language learners needed personalized, interactive content beyond static lessons — and educators lacked a platform to build, share, and monetize AI-enhanced courses without building everything from scratch.',
-        'زبان‌آموزان به محتوای تعاملی و شخصی‌سازی‌شده فراتر از درس‌های ثابت نیاز داشتند — و مدرسان پلتفرمی برای ساخت، اشتراک و درآمدزایی از دوره‌های AI-enhanced بدون ساخت همه‌چیز از صفر نداشتند.',
-      ),
-      solution: L(
-        'Built the backend with Django and integrated AI APIs for conversational assistants and teaching bots. Implemented course creation workflows (comprehensive, grammar, reading, etc.), per-course chat assistants, specialized bots for vocabulary and grammar practice, user enrollment, and a creator monetization engine — enabling a marketplace-style learning ecosystem.',
-        'بک‌اند با Django و یکپارچه‌سازی AI API برای دستیار مکالمه‌ای و ربات‌های آموزشی. گردش کار ساخت دوره (جامع، گرامر، ریدینگ و ...)، دستیار چت برای هر دوره، ربات‌های تخصصی لغت و گرامر، ثبت‌نام کاربران و موتور درآمدزایی سازندگان — اکوسیستم یادگیری شبیه marketplace.',
-      ),
-      results: L(
-        'Creators can publish courses and bots, learners get AI-powered interactive tutoring, and the monetization layer supports sustainable content creation on the platform.',
-        'سازندگان دوره و ربات منتشر می‌کنند، یادگیرندگان آموزش تعاملی با AI می‌گیرند و لایه درآمدزایی خلق محتوای پایدار را پشتیبانی می‌کند.',
-      ),
-      myRole: L('Backend Developer', 'توسعه‌دهنده بک‌اند'),
-      duration: L('Multi-phase', 'چند فازی'),
-      imageAsset: 'assets/images/projects/ai-language-learning.jpg',
-      isFeatured: true,
-    ),
-    ProjectItem(
-      id: 'supishi-mission-forms',
-      title: L('Supishi — Mission Form Digitization', 'Supishi — الکترونیکی‌سازی فرم مأموریت'),
-      description: L(
-        'Django web platform digitizing field mission forms — multi-step approval workflow with SMS notifications and full reporting.',
-        'پلتفرم وب Django برای دیجیتالی‌سازی فرم مأموریت — گردش تأیید چندمرحله‌ای با SMS و گزارش‌گیری کامل.',
-      ),
-      category: L('Business Web App', 'سامانه وب سازمانی'),
-      tags: ['Django', 'SMS API', 'Workflow', 'Reporting'],
-      color: Color(0xFF8B5CF6),
-      url: 'https://supishi.net',
-      overview: L(
-        'A Django-powered web platform that replaces paper-based mission forms for field operations. When company staff go on missions and inspect client equipment, they fill out digital forms for each device and submit them. An SMS is automatically sent to the client company manager with the form details for review and approval. Once approved, the form moves to the support manager to register and confirm costs. Finally, the department manager reviews all information and, if correct, gives final approval and archives the form. The system includes comprehensive reporting on forms, missions, companies, submitters, and more.',
-        'پلتفرم وب Django که فرم‌های کاغذی مأموریت را در عملیات میدانی جایگزین می‌کند. وقتی نیروهای شرکت مأموریت می‌روند و تجهیزات مشتری را بازدید می‌کنند، فرم دیجیتال برای هر دستگاه پر و ثبت می‌کنند. پیامک خودکار به مسئول شرکت مشتری با جزئیات فرم ارسال می‌شود تا بخواند و تأیید کند. پس از تأیید، فرم به مسئول پشتیبانی می‌رود تا هزینه‌ها را ثبت و تأیید کند. در نهایت مدیر بخش همه اطلاعات را بررسی و در صورت صحت، تأیید نهایی و بایگانی می‌کند. گزارش‌گیری کامل از فرم‌ها، مأموریت‌ها، شرکت‌ها، ثبت‌کنندگان و ... وجود دارد.',
-      ),
-      challenge: L(
-        'Paper mission forms caused delays, lost documents, no audit trail, and a slow multi-party approval chain between field staff, client managers, support, and department heads.',
-        'فرم‌های کاغذی مأموریت باعث تأخیر، گم شدن مدارک، نبود audit trail و زنجیره تأیید کند بین نیروی میدانی، مدیر مشتری، پشتیبانی و مدیر بخش می‌شد.',
-      ),
-      solution: L(
-        'Built with Django — digital form submission per device during missions, automated SMS notifications to client managers, staged approval workflow (client → support costs → department manager → archive), role-based access, and rich reporting dashboards filtered by forms, missions, companies, and staff.',
-        'با Django — ثبت فرم دیجیتال برای هر دستگاه در مأموریت، اعلان SMS خودکار به مدیر مشتری، گردش تأیید مرحله‌ای (مشتری ← هزینه پشتیبانی ← مدیر بخش ← بایگانی)، دسترسی نقش‌محور و داشبورد گزارش بر اساس فرم، مأموریت، شرکت و پرسنل.',
-      ),
-      results: L(
-        'Paperless mission documentation, faster approvals via SMS-triggered client sign-off, traceable workflow at every stage, and complete analytics for operations management.',
-        'مستندسازی بدون کاغذ مأموریت، تأیید سریع‌تر با SMS مشتری، گردش کار قابل ردیابی در هر مرحله، و آمار کامل برای مدیریت عملیات.',
-      ),
-      myRole: L('Full-Stack Developer', 'توسعه‌دهنده فول‌استک'),
-      duration: L('Production system', 'سیستم عملیاتی'),
-      imageAsset: 'assets/images/projects/supishi.jpg',
-      isFeatured: true,
-    ),
-    ProjectItem(
       id: 'warehouse-management',
       title: L('Warehouse Management System', 'سامانه مدیریت انبار'),
       description: L(
@@ -369,7 +401,14 @@ class PortfolioData {
       ),
       myRole: L('Full-Stack Developer', 'توسعه‌دهنده فول‌استک'),
       duration: L('Multi-phase', 'چند فازی'),
-      imageAsset: 'assets/images/projects/warehouse-management.jpg',
+      imageAsset: 'assets/images/projects/warehouse1.png',
+      galleryAssets: [
+        'assets/images/projects/warehouse2.png',
+        'assets/images/projects/warehouse3.png',
+        'assets/images/projects/warehouse4.png',
+        'assets/images/projects/warehouse5.png',
+        'assets/images/projects/warehouse6.png',
+      ],
       isFeatured: false,
     ),
     ProjectItem(
@@ -401,7 +440,13 @@ class PortfolioData {
       ),
       myRole: L('Game Developer', 'توسعه‌دهنده بازی'),
       duration: L('Multi-phase', 'چند فازی'),
-      imageAsset: 'assets/images/projects/rummy-dice.jpg',
+      imageAsset: 'assets/images/projects/ramodis1.png',
+      galleryAssets: [
+        'assets/images/projects/ramodis2.png',
+        'assets/images/projects/ramodis3.png',
+        'assets/images/projects/ramodis4.png',
+      ],
+      portraitCover: true,
       isFeatured: true,
     ),
     ProjectItem(
@@ -433,7 +478,11 @@ class PortfolioData {
       ),
       myRole: L('Flutter Developer', 'توسعه‌دهنده Flutter'),
       duration: L('Personal project', 'پروژه شخصی'),
-      imageAsset: 'assets/images/projects/music-player.jpg',
+      imageAsset: 'assets/images/projects/music_player1.jpg',
+      galleryAssets: [
+        'assets/images/projects/music_player2.jpg',
+      ],
+      portraitCover: true,
       isFeatured: false,
     ),
     ProjectItem(
@@ -497,7 +546,7 @@ class PortfolioData {
       ),
       myRole: L('Frontend Developer', 'توسعه‌دهنده فرانت‌اند'),
       duration: L('Client project', 'پروژه مشتری'),
-      imageAsset: 'assets/images/projects/iot-tracker.jpg',
+      imageAsset: 'assets/images/projects/IOTTracker1.png',
       isFeatured: false,
     ),
     ProjectItem(
@@ -561,7 +610,7 @@ class PortfolioData {
       ),
       myRole: L('ML Engineer', 'مهندس یادگیری ماشین'),
       duration: L('Research project', 'پروژه تحقیقاتی'),
-      imageAsset: 'assets/images/projects/yolo-plate.jpg',
+      imageAsset: 'assets/images/projects/plate_detection1.jpg',
       isFeatured: true,
     ),
     ProjectItem(
@@ -593,7 +642,10 @@ class PortfolioData {
       ),
       myRole: L('Flutter Developer', 'توسعه‌دهنده Flutter'),
       duration: L('Production system', 'سیستم عملیاتی'),
-      imageAsset: 'assets/images/projects/jet-printer-excel.jpg',
+      imageAsset: 'assets/images/projects/nitka1.png',
+      galleryAssets: [
+        'assets/images/projects/nitka2.png',
+      ],
       isFeatured: false,
     ),
     ProjectItem(
@@ -625,7 +677,11 @@ class PortfolioData {
       ),
       myRole: L('Python Developer', 'توسعه‌دهنده Python'),
       duration: L('Production system', 'سیستم عملیاتی'),
-      imageAsset: 'assets/images/projects/barcode-label-print.jpg',
+      imageAsset: 'assets/images/projects/MardeKoohestan1.png',
+      galleryAssets: [
+        'assets/images/projects/MardeKoohestan2.png',
+        'assets/images/projects/MardeKoohestan3.png',
+      ],
       isFeatured: false,
     ),
   ];
