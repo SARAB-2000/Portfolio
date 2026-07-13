@@ -6,6 +6,7 @@ import '../data/portfolio_data.dart';
 import '../l10n/app_localizations.dart';
 import '../theme/app_colors.dart';
 import '../widgets/common_widgets.dart';
+import '../widgets/skill_icon_widget.dart';
 
 class ProjectDetailScreen extends StatelessWidget {
   const ProjectDetailScreen({super.key, required this.project});
@@ -89,24 +90,10 @@ class ProjectDetailScreen extends StatelessWidget {
                   Wrap(
                     spacing: 8,
                     runSpacing: 8,
-                    children: project.tags.map((tag) {
-                      return Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: project.color.withValues(alpha: 0.12),
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: project.color.withValues(alpha: 0.3)),
-                        ),
-                        child: Text(
-                          tag,
-                          style: TextStyle(
-                            color: project.color,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 13,
-                          ),
-                        ),
-                      );
-                    }).toList(),
+                    children: project.tags.map((tag) => _ProjectTagChip(
+                          tag: tag,
+                          color: project.color,
+                        )).toList(),
                   ),
                   if (project.allImageAssets.isNotEmpty) ...[
                     const SizedBox(height: 32),
@@ -141,6 +128,43 @@ class ProjectDetailScreen extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _ProjectTagChip extends StatelessWidget {
+  const _ProjectTagChip({
+    required this.tag,
+    required this.color,
+  });
+
+  final String tag;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          SkillIconWidget(skillName: tag, size: 15),
+          const SizedBox(width: 7),
+          Text(
+            tag,
+            style: TextStyle(
+              color: color,
+              fontWeight: FontWeight.w600,
+              fontSize: 13,
             ),
           ),
         ],

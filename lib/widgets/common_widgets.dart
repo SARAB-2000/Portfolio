@@ -143,29 +143,31 @@ class _AnimatedGlowState extends State<AnimatedGlow>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        return Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: AppTheme.accent.withValues(alpha: 0.15 + _controller.value * 0.1),
-                blurRadius: widget.size * 0.5,
-                spreadRadius: widget.size * 0.1,
-              ),
-              BoxShadow(
-                color: AppTheme.accentSecondary.withValues(alpha: 0.1 + _controller.value * 0.08),
-                blurRadius: widget.size * 0.4,
-                spreadRadius: widget.size * 0.05,
-              ),
-            ],
-          ),
-          child: child,
-        );
-      },
-      child: widget.child,
+    return RepaintBoundary(
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, child) {
+          return Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: AppTheme.accent.withValues(alpha: 0.15 + _controller.value * 0.1),
+                  blurRadius: widget.size * 0.5,
+                  spreadRadius: widget.size * 0.1,
+                ),
+                BoxShadow(
+                  color: AppTheme.accentSecondary.withValues(alpha: 0.1 + _controller.value * 0.08),
+                  blurRadius: widget.size * 0.4,
+                  spreadRadius: widget.size * 0.05,
+                ),
+              ],
+            ),
+            child: child,
+          );
+        },
+        child: widget.child,
+      ),
     );
   }
 }

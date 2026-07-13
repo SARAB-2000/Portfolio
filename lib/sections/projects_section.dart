@@ -123,10 +123,9 @@ class _FeaturedProjectCard extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final colors = context.colors;
 
-    return HoverScale(
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
             color: colors.surface,
@@ -185,11 +184,7 @@ class _FeaturedProjectCard extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    )
-        .animate()
-        .fadeIn(delay: (index * 60).ms)
-        .slideY(begin: 0.12, end: 0, delay: (index * 60).ms);
+    );
   }
 }
 
@@ -205,6 +200,8 @@ class _CardCover extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.colors;
+    final dpr = MediaQuery.devicePixelRatioOf(context);
+    final cacheWidth = ((compact ? 280 : 480) * dpr).round();
 
     if (project.portraitCover) {
       return Container(
@@ -218,6 +215,7 @@ class _CardCover extends StatelessWidget {
         child: Image.asset(
           project.imageAsset,
           fit: BoxFit.contain,
+          cacheWidth: cacheWidth,
           errorBuilder: (context, error, stackTrace) => Icon(
             Icons.image_outlined,
             color: colors.textSecondary,
@@ -231,6 +229,7 @@ class _CardCover extends StatelessWidget {
       child: Image.asset(
         project.imageAsset,
         fit: BoxFit.cover,
+        cacheWidth: cacheWidth,
         errorBuilder: (context, error, stackTrace) => Container(
           color: project.color.withValues(alpha: 0.1),
         ),

@@ -24,6 +24,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final ScrollController _scrollController = ScrollController();
+  final ValueNotifier<bool> _isScrolled = ValueNotifier(false);
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final Map<String, GlobalKey> _sectionKeys = {
     'home': GlobalKey(),
@@ -35,8 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
     'contact': GlobalKey(),
   };
 
-  bool _isScrolled = false;
-
   @override
   void initState() {
     super.initState();
@@ -45,8 +44,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _onScroll() {
     final scrolled = _scrollController.offset > 50;
-    if (scrolled != _isScrolled) {
-      setState(() => _isScrolled = scrolled);
+    if (scrolled != _isScrolled.value) {
+      _isScrolled.value = scrolled;
     }
   }
 
@@ -67,6 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
+    _isScrolled.dispose();
     super.dispose();
   }
 
@@ -111,61 +111,85 @@ class _HomeScreenState extends State<HomeScreen> {
           : null,
       body: Stack(
         children: [
-          const Positioned.fill(child: DevPortfolioBackground()),
+          const Positioned.fill(
+            child: RepaintBoundary(child: DevPortfolioBackground()),
+          ),
           CustomScrollView(
             controller: _scrollController,
+            cacheExtent: 400,
             slivers: [
               SliverToBoxAdapter(
-                child: Column(
-                  children: [
-                    SizedBox(height: MediaQuery.paddingOf(context).top + 72),
-                    KeyedSubtree(
-                      key: _sectionKeys['home'],
-                      child: HeroSection(
-                        onViewProjects: () => _scrollToSection('projects'),
-                        onContact: () => _scrollToSection('contact'),
-                      ),
+                child: SizedBox(height: MediaQuery.paddingOf(context).top + 72),
+              ),
+              SliverToBoxAdapter(
+                child: RepaintBoundary(
+                  child: KeyedSubtree(
+                    key: _sectionKeys['home'],
+                    child: HeroSection(
+                      onViewProjects: () => _scrollToSection('projects'),
+                      onContact: () => _scrollToSection('contact'),
                     ),
-                    KeyedSubtree(
-                      key: _sectionKeys['projects'],
-                      child: const ProjectsSection(),
-                    ),
-                    KeyedSubtree(
-                      key: _sectionKeys['skills'],
-                      child: const SkillsSection(),
-                    ),
-                    KeyedSubtree(
-                      key: _sectionKeys['experience'],
-                      child: const ExperienceSection(),
-                    ),
-                    KeyedSubtree(
-                      key: _sectionKeys['education'],
-                      child: const EducationSection(),
-                    ),
-                    // KeyedSubtree(
-                    //   key: _sectionKeys['testimonials'],
-                    //   child: const TestimonialsSection(),
-                    // ),
-                    KeyedSubtree(
-                      key: _sectionKeys['contact'],
-                      child: const ContactSection(),
-                    ),
-                    const FooterSection(),
-                  ],
+                  ),
                 ),
               ),
+              SliverToBoxAdapter(
+                child: RepaintBoundary(
+                  child: KeyedSubtree(
+                    key: _sectionKeys['projects'],
+                    child: const ProjectsSection(),
+                  ),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: RepaintBoundary(
+                  child: KeyedSubtree(
+                    key: _sectionKeys['skills'],
+                    child: const SkillsSection(),
+                  ),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: RepaintBoundary(
+                  child: KeyedSubtree(
+                    key: _sectionKeys['experience'],
+                    child: const ExperienceSection(),
+                  ),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: RepaintBoundary(
+                  child: KeyedSubtree(
+                    key: _sectionKeys['education'],
+                    child: const EducationSection(),
+                  ),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: RepaintBoundary(
+                  child: KeyedSubtree(
+                    key: _sectionKeys['contact'],
+                    child: const ContactSection(),
+                  ),
+                ),
+              ),
+              const SliverToBoxAdapter(child: FooterSection()),
             ],
           ),
           Positioned(
             top: 0,
             left: 0,
             right: 0,
-            child: PortfolioNavBar(
-              onNavTap: _scrollToSection,
-              onLanguageToggle: () =>
-                  context.read<LocaleProvider>().toggleLocale(),
-              onMenuTap: () => _scaffoldKey.currentState?.openDrawer(),
-              isScrolled: _isScrolled,
+            child: ValueListenableBuilder<bool>(
+              valueListenable: _isScrolled,
+              builder: (context, isScrolled, _) {
+                return PortfolioNavBar(
+                  onNavTap: _scrollToSection,
+                  onLanguageToggle: () =>
+                      context.read<LocaleProvider>().toggleLocale(),
+                  onMenuTap: () => _scaffoldKey.currentState?.openDrawer(),
+                  isScrolled: isScrolled,
+                );
+              },
             ),
           ),
         ],

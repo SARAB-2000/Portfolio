@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -131,9 +129,11 @@ class HeroSection extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Center(
-          child: AnimatedGlow(
-            size: 280,
-            child: const ProfileAvatar(size: 280),
+          child: RepaintBoundary(
+            child: AnimatedGlow(
+              size: 280,
+              child: const ProfileAvatar(size: 280),
+            ),
           ),
         ).animate().fadeIn(delay: 300.ms).scale(
               begin: const Offset(0.8, 0.8),
@@ -342,106 +342,97 @@ class TechMarquee extends StatefulWidget {
   State<TechMarquee> createState() => _TechMarqueeState();
 }
 
-class _TechMarqueeState extends State<TechMarquee> {
-  late ScrollController _controller;
-  Timer? _scrollTimer;
+class _TechMarqueeState extends State<TechMarquee> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller = ScrollController();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _startScroll());
-  }
-
-  void _startScroll() {
-    if (!mounted) return;
-
-    if (!_controller.hasClients) {
-      WidgetsBinding.instance.addPostFrameCallback((_) => _startScroll());
-      return;
-    }
-
-    final position = _controller.position;
-    if (!position.hasContentDimensions) {
-      WidgetsBinding.instance.addPostFrameCallback((_) => _startScroll());
-      return;
-    }
-
-    final maxScroll = position.maxScrollExtent;
-    if (maxScroll <= 0) return;
-
-    _scrollTimer?.cancel();
-    _scrollTimer = Timer.periodic(const Duration(milliseconds: 30), (_) {
-      if (!mounted || !_controller.hasClients) return;
-
-      final pos = _controller.position;
-      if (!pos.hasContentDimensions) return;
-
-      final extent = pos.maxScrollExtent;
-      if (extent <= 0) return;
-
-      final loopPoint = extent / 2;
-      if (_controller.offset >= loopPoint) {
-        _controller.jumpTo(0);
-      } else {
-        _controller.jumpTo(_controller.offset + 1);
-      }
-    });
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 45),
+    )..repeat();
   }
 
   @override
   void dispose() {
-    _scrollTimer?.cancel();
     _controller.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final items = [...PortfolioData.techMarquee, ...PortfolioData.techMarquee];
+    final labels = PortfolioData.techMarquee;
+    const chipWidth = 118.0;
+    final loopWidth = labels.length * chipWidth;
 
-    return SizedBox(
-      height: 44,
-      child: ListView.separated(
-        controller: _controller,
-        scrollDirection: Axis.horizontal,
-        itemCount: items.length,
-        separatorBuilder: (_, _) => const SizedBox(width: 12),
-        itemBuilder: (context, index) {
-          final colors = context.colors;
-          final label = items[index];
-          return Container(
-            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-            decoration: BoxDecoration(
-              color: colors.surfaceLight,
-              borderRadius: BorderRadius.circular(100),
-              border: Border.all(color: colors.border),
-            ),
+    return RepaintBoundary(
+      child: SizedBox(
+        height: 44,
+        child: ClipRect(
+          child: AnimatedBuilder(
+            animation: _controller,
+            builder: (context, child) {
+              return Transform.translate(
+                offset: Offset(-_controller.value * loopWidth, 0),
+                child: child,
+              );
+            },
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Container(
-                  padding: const EdgeInsets.all(3),
-                  decoration: BoxDecoration(
-                    color: colors.surface,
-                    borderRadius: BorderRadius.circular(6),
-                    border: Border.all(color: colors.border.withValues(alpha: 0.5)),
+                for (final label in [...labels, ...labels])
+                  Padding(
+                    padding: const EdgeInsets.only(right: 12),
+                    child: _MarqueeChip(label: label),
                   ),
-                  child: SkillIconWidget(skillName: label, size: 16),
-                ),
-                const SizedBox(width: 8),
-                Text(
-                  label,
-                  style: TextStyle(
-                    color: colors.textSecondary,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 13,
-                  ),
-                ),
               ],
             ),
-          );
-        },
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _MarqueeChip extends StatelessWidget {
+  const _MarqueeChip({required this.label});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.colors;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      decoration: BoxDecoration(
+        color: colors.surfaceLight,
+        borderRadius: BorderRadius.circular(100),
+        border: Border.all(color: colors.border),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(3),
+            decoration: BoxDecoration(
+              color: colors.surface,
+              borderRadius: BorderRadius.circular(6),
+              border: Border.all(color: colors.border.withValues(alpha: 0.5)),
+            ),
+            child: SkillIconWidget(skillName: label, size: 16),
+          ),
+          const SizedBox(width: 8),
+          Text(
+            label,
+            style: TextStyle(
+              color: colors.textSecondary,
+              fontWeight: FontWeight.w500,
+              fontSize: 13,
+            ),
+          ),
+        ],
       ),
     );
   }

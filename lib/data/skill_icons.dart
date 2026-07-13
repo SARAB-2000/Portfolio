@@ -20,6 +20,14 @@ SkillBrand skillBrandFor(String name) {
 
 const _aliases = {
   'DRF': 'Django REST Framework',
+  'Django REST': 'Django REST Framework',
+  'REST API': 'Postman',
+  'Web': 'HTML',
+  'Excel': 'Microsoft Excel',
+  'SMS API': 'Twilio',
+  'IoT': 'Firebase',
+  'Push Notifications': 'Firebase',
+  'PySide': 'Qt',
 };
 
 String skillIconCdnUrl(SkillBrand brand) {
@@ -60,4 +68,8 @@ final Map<String, SkillBrand> _brands = {
   'Git': SkillBrand(slug: 'git', color: Color(0xFFF05032)),
   'Postman': SkillBrand(slug: 'postman', color: Color(0xFFFF6C37)),
   'Docker': SkillBrand(slug: 'docker', color: Color(0xFF2496ED)),
+  'Microsoft Excel': SkillBrand(slug: 'microsoftexcel', color: Color(0xFF217346)),
+  'Twilio': SkillBrand(slug: 'twilio', color: Color(0xFFF22F46)),
+  'Firebase': SkillBrand(slug: 'firebase', color: Color(0xFFFFCA28)),
+  'Qt': SkillBrand(slug: 'qt', color: Color(0xFF41CD52)),
 };

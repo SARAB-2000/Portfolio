@@ -2,9 +2,9 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../data/skill_icons.dart';
 import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
-import 'skill_icon_widget.dart';
 
 /// Decorative developer-themed background — grid, code snippets, tech icons.
 class DevPortfolioBackground extends StatelessWidget {
@@ -145,7 +145,7 @@ class DevPortfolioBackground extends StatelessWidget {
                   color: AppTheme.accent.withValues(alpha: 0.12),
                 ),
               ),
-              child: SkillIconWidget(skillName: p.name, size: p.size * 0.55),
+              child: _BackgroundSkillBadge(name: p.name, size: p.size * 0.55),
             ),
           ),
         ),
@@ -654,6 +654,38 @@ class _Line {
 
   final String text;
   final Color color;
+}
+
+class _BackgroundSkillBadge extends StatelessWidget {
+  const _BackgroundSkillBadge({required this.name, required this.size});
+
+  final String name;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    final brand = skillBrandFor(name);
+    final color = skillIconColor(context, brand.color);
+    final label = name.isNotEmpty ? name[0].toUpperCase() : '?';
+
+    return Container(
+      width: size,
+      height: size,
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: color.withValues(alpha: 0.15),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Text(
+        label,
+        style: TextStyle(
+          fontSize: size * 0.55,
+          fontWeight: FontWeight.w800,
+          color: color,
+        ),
+      ),
+    );
+  }
 }
 
 class _DotGridPainter extends CustomPainter {
