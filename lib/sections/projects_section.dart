@@ -7,8 +7,24 @@ import '../routes/app_routes.dart';
 import '../theme/app_colors.dart';
 import '../widgets/common_widgets.dart';
 
-class ProjectsSection extends StatelessWidget {
+const _initialVisibleCount = 4;
+
+int _crossAxisCountForWidth(double width) {
+  if (width >= 1200) return 4;
+  if (width >= 900) return 3;
+  if (width >= 560) return 2;
+  return 1;
+}
+
+class ProjectsSection extends StatefulWidget {
   const ProjectsSection({super.key});
+
+  @override
+  State<ProjectsSection> createState() => _ProjectsSectionState();
+}
+
+class _ProjectsSectionState extends State<ProjectsSection> {
+  bool _showAll = false;
 
   @override
   Widget build(BuildContext context) {
@@ -16,11 +32,17 @@ class ProjectsSection extends StatelessWidget {
     final isWide = MediaQuery.sizeOf(context).width > 900;
     final projects = PortfolioData.projects;
 
+    final hiddenCount = projects.length > _initialVisibleCount
+        ? projects.length - _initialVisibleCount
+        : 0;
+    final visibleProjects =
+        _showAll ? projects : projects.take(_initialVisibleCount).toList();
+
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(
         horizontal: isWide ? 48 : 24,
-        vertical: 80,
+        vertical: 64,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,31 +51,50 @@ class ProjectsSection extends StatelessWidget {
             title: l10n.sectionProjects,
             subtitle: l10n.sectionProjectsSubtitle,
           ).animate().fadeIn().slideY(begin: 0.2, end: 0),
-          const SizedBox(height: 48),
+          const SizedBox(height: 32),
           LayoutBuilder(
             builder: (context, constraints) {
-              const spacing = 24.0;
-              final crossAxisCount = constraints.maxWidth > 1100
-                  ? 3
-                  : constraints.maxWidth > 700
-                      ? 2
-                      : 1;
+              final crossAxisCount = _crossAxisCountForWidth(constraints.maxWidth);
+              const spacing = 16.0;
               final cardWidth =
                   (constraints.maxWidth - spacing * (crossAxisCount - 1)) / crossAxisCount;
+              final compact = crossAxisCount >= 3;
 
-              return Wrap(
-                spacing: spacing,
-                runSpacing: spacing,
+              return Column(
                 children: [
-                  for (var index = 0; index < projects.length; index++)
-                    SizedBox(
-                      width: cardWidth,
-                      child: _ProjectCard(
-                        project: projects[index],
-                        onTap: () => AppRoutes.openProject(context, projects[index]),
-                        index: index,
-                      ),
+                  Wrap(
+                    spacing: spacing,
+                    runSpacing: spacing,
+                    children: [
+                      for (var i = 0; i < visibleProjects.length; i++)
+                        SizedBox(
+                          width: cardWidth,
+                          child: _FeaturedProjectCard(
+                            project: visibleProjects[i],
+                            index: i,
+                            compact: compact,
+                            onTap: () =>
+                                AppRoutes.openProject(context, visibleProjects[i]),
+                          ),
+                        ),
+                    ],
+                  ),
+                  if (hiddenCount > 0) ...[
+                    const SizedBox(height: 20),
+                    Center(
+                      child: _showAll
+                          ? TextButton.icon(
+                              onPressed: () => setState(() => _showAll = false),
+                              icon: const Icon(Icons.expand_less, size: 20),
+                              label: Text(l10n.showLessProjects),
+                            )
+                          : OutlinedButton.icon(
+                              onPressed: () => setState(() => _showAll = true),
+                              icon: const Icon(Icons.expand_more, size: 20),
+                              label: Text(l10n.viewMoreProjects(hiddenCount)),
+                            ),
                     ),
+                  ],
                 ],
               );
             },
@@ -64,16 +105,18 @@ class ProjectsSection extends StatelessWidget {
   }
 }
 
-class _ProjectCard extends StatelessWidget {
-  const _ProjectCard({
+class _FeaturedProjectCard extends StatelessWidget {
+  const _FeaturedProjectCard({
     required this.project,
     required this.onTap,
     required this.index,
+    this.compact = false,
   });
 
   final ProjectItem project;
   final VoidCallback onTap;
   final int index;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
@@ -86,155 +129,78 @@ class _ProjectCard extends StatelessWidget {
         child: Container(
           clipBehavior: Clip.antiAlias,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: colors.border),
             color: colors.surface,
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: colors.border),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
             children: [
               if (project.imageAsset.isNotEmpty)
-                _ProjectCoverImage(project: project),
-              Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      project.color.withValues(alpha: 0.12),
-                      colors.surface,
-                    ],
-                  ),
-                ),
-                child: Stack(
+                _CardCover(project: project, compact: compact),
+              Padding(
+                padding: EdgeInsets.fromLTRB(compact ? 12 : 16, compact ? 10 : 14, compact ? 12 : 16, compact ? 12 : 14),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Positioned(
-                      top: -30,
-                      right: -30,
-                      child: Container(
-                        width: 120,
-                        height: 120,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: project.color.withValues(alpha: 0.1),
-                        ),
-                      ),
+                    Text(
+                      project.title.of(context),
+                      maxLines: compact ? 1 : 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                            fontWeight: FontWeight.w700,
+                            height: 1.3,
+                            fontSize: compact ? 13 : null,
+                          ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                            Row(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: project.color.withValues(alpha: 0.2),
-                                    borderRadius: BorderRadius.circular(6),
-                                  ),
-                                  child: Text(
-                                    project.category.of(context),
-                                    style: TextStyle(
-                                      color: project.color,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                                if (project.isFeatured) ...[
-                                  const SizedBox(width: 8),
-                                  const Icon(
-                                    Icons.star,
-                                    color: Color(0xFFF59E0B),
-                                    size: 16,
-                                  ),
-                                ],
-                              ],
-                            ),
-                            const SizedBox(height: 12),
-                            Text(
-                              project.title.of(context),
-                              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              project.description.of(context),
-                              maxLines: project.imageAsset.isNotEmpty ? 2 : 3,
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: colors.textSecondary,
-                                    height: 1.5,
-                                  ),
-                            ),
-                            const SizedBox(height: 16),
-                            Wrap(
-                              spacing: 8,
-                              runSpacing: 8,
-                              children: project.tags.map((tag) {
-                                return Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: colors.surfaceLight,
-                                    borderRadius: BorderRadius.circular(6),
-                                    border: Border.all(color: colors.border),
-                                  ),
-                                  child: Text(
-                                    tag,
-                                    style: TextStyle(
-                                      fontSize: 11,
-                                      color: colors.textSecondary,
-                                    ),
-                                  ),
-                                );
-                              }).toList(),
-                            ),
-                            const SizedBox(height: 12),
-                            Row(
-                              children: [
-                                Text(
-                                  l10n.viewProject,
-                                  style: TextStyle(
-                                    color: project.color,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                                const SizedBox(width: 4),
-                                Icon(Icons.arrow_forward, color: project.color, size: 16),
-                              ],
-                            ),
-                          ],
+                    SizedBox(height: compact ? 4 : 6),
+                    Text(
+                      project.description.of(context),
+                      maxLines: compact ? 1 : 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: colors.textSecondary,
+                            height: 1.4,
+                            fontSize: compact ? 11 : null,
+                          ),
+                    ),
+                    SizedBox(height: compact ? 8 : 10),
+                    Row(
+                      children: [
+                        Text(
+                          l10n.viewProject,
+                          style: TextStyle(
+                            color: project.color,
+                            fontWeight: FontWeight.w600,
+                            fontSize: compact ? 12 : 13,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
+                        const SizedBox(width: 4),
+                        Icon(Icons.arrow_forward, color: project.color, size: compact ? 12 : 14),
+                      ],
+                    ),
+                  ],
                 ),
+              ),
             ],
           ),
         ),
       ),
     )
         .animate()
-        .fadeIn(delay: (index * 100).ms)
-        .slideY(begin: 0.2, end: 0, delay: (index * 100).ms);
+        .fadeIn(delay: (index * 60).ms)
+        .slideY(begin: 0.12, end: 0, delay: (index * 60).ms);
   }
 }
 
-class _ProjectCoverImage extends StatelessWidget {
-  const _ProjectCoverImage({required this.project});
+class _CardCover extends StatelessWidget {
+  const _CardCover({
+    required this.project,
+    this.compact = false,
+  });
 
   final ProjectItem project;
+  final bool compact;
 
   @override
   Widget build(BuildContext context) {
@@ -242,24 +208,19 @@ class _ProjectCoverImage extends StatelessWidget {
 
     if (project.portraitCover) {
       return Container(
-        height: 260,
+        height: compact ? 120 : 160,
         width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              project.color.withValues(alpha: 0.18),
-              colors.surface,
-            ],
-          ),
+        color: project.color.withValues(alpha: 0.06),
+        padding: EdgeInsets.symmetric(
+          vertical: compact ? 8 : 12,
+          horizontal: compact ? 20 : 32,
         ),
-        padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 48),
         child: Image.asset(
           project.imageAsset,
           fit: BoxFit.contain,
-          errorBuilder: (context, error, stackTrace) => Container(
-            color: project.color.withValues(alpha: 0.15),
+          errorBuilder: (context, error, stackTrace) => Icon(
+            Icons.image_outlined,
+            color: colors.textSecondary,
           ),
         ),
       );
@@ -271,7 +232,7 @@ class _ProjectCoverImage extends StatelessWidget {
         project.imageAsset,
         fit: BoxFit.cover,
         errorBuilder: (context, error, stackTrace) => Container(
-          color: project.color.withValues(alpha: 0.15),
+          color: project.color.withValues(alpha: 0.1),
         ),
       ),
     );

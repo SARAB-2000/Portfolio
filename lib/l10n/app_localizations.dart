@@ -302,6 +302,18 @@ abstract class AppLocalizations {
   /// **'View All'**
   String get viewAllProjects;
 
+  /// No description provided for @viewMoreProjects.
+  ///
+  /// In en, this message translates to:
+  /// **'View {count} more projects'**
+  String viewMoreProjects(int count);
+
+  /// No description provided for @showLessProjects.
+  ///
+  /// In en, this message translates to:
+  /// **'Show less'**
+  String get showLessProjects;
+
   /// No description provided for @present.
   ///
   /// In en, this message translates to:

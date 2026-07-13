@@ -34,6 +34,13 @@
   "footerRights": "All rights reserved.",
   "viewProject": "View Project",
   "viewAllProjects": "View All",
+  "viewMoreProjects": "View {count} more projects",
+  "@viewMoreProjects": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "showLessProjects": "Show less",
   "present": "Present",
   "languageToggle": "FA",
   "themeToggleDark": "Dark",

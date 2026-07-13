@@ -34,6 +34,13 @@
   "footerRights": "تمامی حقوق محفوظ است.",
   "viewProject": "مشاهده پروژه",
   "viewAllProjects": "مشاهده همه",
+  "viewMoreProjects": "مشاهده {count} پروژه دیگر",
+  "@viewMoreProjects": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "showLessProjects": "نمایش کمتر",
   "present": "اکنون",
   "languageToggle": "EN",
   "themeToggleDark": "تیره",

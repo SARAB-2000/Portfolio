@@ -111,6 +111,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get viewAllProjects => 'View All';
 
   @override
+  String viewMoreProjects(int count) {
+    return 'View $count more projects';
+  }
+
+  @override
+  String get showLessProjects => 'Show less';
+
+  @override
   String get present => 'Present';
 
   @override

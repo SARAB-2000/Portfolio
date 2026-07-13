@@ -115,6 +115,14 @@ class AppLocalizationsFa extends AppLocalizations {
   String get viewAllProjects => 'مشاهده همه';
 
   @override
+  String viewMoreProjects(int count) {
+    return 'مشاهده $count پروژه دیگر';
+  }
+
+  @override
+  String get showLessProjects => 'نمایش کمتر';
+
+  @override
   String get present => 'اکنون';
 
   @override
