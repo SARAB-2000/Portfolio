@@ -369,24 +369,30 @@ class _TechMarqueeState extends State<TechMarquee> with SingleTickerProviderStat
     return RepaintBoundary(
       child: SizedBox(
         height: 44,
+        width: double.infinity,
         child: ClipRect(
-          child: AnimatedBuilder(
-            animation: _controller,
-            builder: (context, child) {
-              return Transform.translate(
-                offset: Offset(-_controller.value * loopWidth, 0),
-                child: child,
-              );
-            },
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                for (final label in [...labels, ...labels])
-                  Padding(
-                    padding: const EdgeInsets.only(right: 12),
-                    child: _MarqueeChip(label: label),
-                  ),
-              ],
+          child: UnconstrainedBox(
+            alignment: Alignment.centerLeft,
+            constrainedAxis: Axis.vertical,
+            clipBehavior: Clip.hardEdge,
+            child: AnimatedBuilder(
+              animation: _controller,
+              builder: (context, child) {
+                return Transform.translate(
+                  offset: Offset(-_controller.value * loopWidth, 0),
+                  child: child,
+                );
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  for (final label in [...labels, ...labels])
+                    Padding(
+                      padding: const EdgeInsets.only(right: 12),
+                      child: _MarqueeChip(label: label),
+                    ),
+                ],
+              ),
             ),
           ),
         ),
