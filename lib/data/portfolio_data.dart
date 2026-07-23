@@ -96,6 +96,8 @@ class ProjectItem {
   /// Use for mobile/portrait screenshots — shows full image with letterboxing.
   final bool portraitCover;
 
+  bool get hasLiveSite => url.trim().isNotEmpty;
+
   /// Cover image first, then gallery — deduplicated.
   List<String> get allImageAssets {
     final images = <String>[];
@@ -239,7 +241,7 @@ class PortfolioData {
       category: L('Enterprise Web App', 'سامانه وب سازمانی'),
       tags: ['Django', 'Redis', 'Celery', 'MySQL'],
       color: Color(0xFF0D9488),
-      url: 'https://github.com/sarab-2000',
+      url: '',
       overview: L(
         'A comprehensive product traceability platform for manufacturing operations. The system generates unique 2D barcodes for each product unit based on product type and attributes, sends them to industrial Jet Printers for on-product labeling, and uses camera scanning on the production line. When the configured number of units per carton is reached, it automatically generates a unique master carton barcode and sends it to a label printer. Warehouse, distribution, and returns departments update product status by scanning these barcodes, with full reporting and analytics built in.',
         'پلتفرم جامع ردیابی محصول برای عملیات تولید. برای هر واحد محصول بر اساس نوع و مشخصات، بارکد دوبعدی یونیک تولید می‌کند و به Jet Printer صنعتی برای چاپ روی محصول ارسال می‌کند. با اسکن دوربین در خط تولید، وقتی به تعداد تعریف‌شده در هر کارتن رسید، بارکد مادر یونیک کارتن ساخته و به label printer داده می‌شود. بخش‌های انبار، توزیع و مرجوعی با اسکن بارکدها وضعیت را به‌روز می‌کنند و گزارش‌گیری و آمار کامل در دسترس است.',
@@ -276,7 +278,7 @@ class PortfolioData {
       category: L('EdTech Platform', 'پلتفرم آموزشی'),
       tags: ['Django', 'AI APIs', 'REST API', 'MySQL'],
       color: Color(0xFF6366F1),
-      url: 'https://github.com/sarab-2000',
+      url: '',
       overview: L(
         'Backend platform for an AI-driven language learning application. Users can create structured language courses — comprehensive programs, grammar, reading, and more — and attach intelligent assistants to each course. Assistant bots answer learner questions via chat about course content, while specialized teaching bots can drill vocabulary, grammar, and other skills. Other users discover and enroll in published courses and bots. The platform includes a monetization system so course and bot creators can earn revenue from their content.',
         'بک‌اند پلتفرم اپ یادگیری زبان مبتنی بر هوش مصنوعی. کاربران دوره‌های ساختاریافته می‌سازند — دوره جامع، گرامر، ریدینگ و ... — و به هر دوره دستیار هوشمند تعیین می‌کنند. ربات دستیار در قالب چت به سوالات یادگیرندگان درباره محتوای دوره پاسخ می‌دهد؛ ربات‌های آموزشی هم برای کار روی لغات، گرامر و مهارت‌های دیگر ساخته می‌شوند. سایر کاربران دوره‌ها و ربات‌ها را کشف و استفاده می‌کنند. سیستم درآمدزایی برای سازندگان دوره و ربات هم پیاده‌سازی شده است.',
@@ -350,7 +352,7 @@ class PortfolioData {
       category: L('Personal Web App', 'وب‌اپ شخصی'),
       tags: ['Flutter', 'Web', 'RTL', 'i18n', 'Provider'],
       color: Color(0xFF6366F1),
-      url: 'https://github.com/sarab-2000',
+      url: '',
       overview: L(
         'A dynamic single-page developer portfolio built with Flutter for web. Showcases selected projects with full bilingual case study pages, grouped skills with brand icons, work experience and education timelines, and contact channels — all with smooth animations, dark/light theme toggle, and a developer-themed background. Deploy-ready for GitHub Pages and Firebase Hosting.',
         'پورتفولیو تک‌صفحه‌ای پویا با Flutter برای وب. نمایش پروژه‌های منتخب با صفحات case study دوزبانه، مهارت‌های گروه‌بندی‌شده با آیکون برند، timeline تجربه و تحصیلات، و راه‌های ارتباطی — همراه انیمیشن‌های روان، تم روشن/تیره و پس‌زمینه تم برنامه‌نویسی. آماده deploy روی GitHub Pages و Firebase Hosting.',
@@ -382,7 +384,7 @@ class PortfolioData {
       category: L('Inventory System', 'سامانه انبارداری'),
       tags: ['Django', 'REST API', 'Electron.js', 'MySQL'],
       color: Color(0xFF059669),
-      url: 'https://github.com/sarab-2000',
+      url: '',
       overview: L(
         'A full-stack warehouse management platform built with Django REST API and an Electron.js desktop client. The system supports multiple access levels, each with dedicated permissions. Users can add products to warehouses individually, via unique barcodes, or by uploading Excel files. Outbound operations — delivery to field experts or direct delivery to customers — and product returns are fully tracked. Administrators can set limits on the number of users and warehouses per account. Comprehensive reports include current stock levels, inbound/outbound activity within custom date ranges, and more.',
         'پلتفرم full-stack مدیریت انبار با Django REST API و کلاینت دسکتاپ Electron.js. سطح دسترسی‌های مختلف با مجوزهای اختصاصی. ورود محصول به انبار به صورت تکی، با بارکد یونیک، یا آپلود فایل Excel. ثبت خروج (تحویل به کارشناس یا مشتری) و مرجوعی. محدودیت تعداد کاربر و تعداد انبار قابل تنظیم است. گزارش‌ها: موجودی فعلی، ورود/خروج در بازه زمانی و موارد دیگر.',
@@ -421,7 +423,7 @@ class PortfolioData {
       category: L('Mobile Game', 'بازی موبایل'),
       tags: ['Flutter', 'Django REST', 'Local Network', 'Multiplayer'],
       color: Color(0xFFF59E0B),
-      url: 'https://github.com/sarab-2000',
+      url: '',
       overview: L(
         'A digital adaptation of RamODis, delivered in two architectures. Version 1 is fully built with Flutter — players can compete against an AI bot or friends over a local network. Version 2 uses Flutter for the frontend and Django REST Framework for the backend, enabling bot matches and friend-vs-friend games over a wider network beyond local LAN. Both versions preserve core game rules while adding smooth UI, turn management, and real-time multiplayer sync.',
         'نسخه دیجیتال بازی کلاسیک رام و دیس در دو معماری. نسخه ۱ کاملاً Flutter — بازی با ربات AI یا دوستان روی شبکه محلی. نسخه ۲ فرانت Flutter و بک‌اند Django REST Framework — بازی با ربات و دوستان روی شبکه گسترده‌تر از LAN. هر دو نسخه قوانین اصلی بازی را حفظ و UI روان، مدیریت نوبت و همگام‌سازی multiplayer را اضافه می‌کنند.',
@@ -459,7 +461,7 @@ class PortfolioData {
       category: L('Mobile App', 'اپ موبایل'),
       tags: ['Flutter', 'Audio', 'Local Storage', 'Media'],
       color: Color(0xFFEC4899),
-      url: 'https://github.com/sarab-2000',
+      url: '',
       overview: L(
         'A Flutter music player that scans and lists all songs on the device, sortable by date or name. Users can play tracks sequentially or in shuffle mode. Configurable filters exclude songs shorter than a set duration or below a minimum file size from the library and playback. Full playlist creation, favorite marking, and a built-in equalizer for custom audio tuning round out the experience.',
         'موزیک پلیر Flutter که آهنگ‌های دستگاه را اسکن و لیست می‌کند — مرتب‌سازی بر اساس زمان یا نام. پخش ترتیبی یا تصادفی (shuffle). فیلتر قابل تنظیم: حذف آهنگ‌های کوتاه‌تر از m دقیقه یا کوچک‌تر از n حجم از لیست و پخش. ساخت پلی‌لیست، favorite کردن آهنگ‌ها و اکولایزر داخلی برای تنظیم صدا.',
@@ -495,7 +497,7 @@ class PortfolioData {
       category: L('Healthcare Web App', 'سامانه وب درمانی'),
       tags: ['Django', 'Booking', 'Scheduling', 'MySQL'],
       color: Color(0xFF06B6D4),
-      url: 'https://github.com/sarab-2000',
+      url: '',
       overview: L(
         'A Django-based online appointment scheduling platform for clinics. Clinic administrators define their available time slots on the website, and patients browse open appointments and reserve the time that suits them — replacing phone-based booking with a self-service digital flow.',
         'پلتفرم رزرو نوبت آنلاین مبتنی بر Django برای کلینیک‌ها. مسئول کلینیک نوبت‌های خالی را در سایت تعیین می‌کند و مشتریان/بیماران با توجه به زمان‌های آزاد، هر تایمی که بخواهند رزرو می‌کنند — جایگزین نوبت‌گیری تلفنی با جریان دیجیتال self-service.',
@@ -527,7 +529,7 @@ class PortfolioData {
       category: L('IoT Mobile App', 'اپ موبایل IoT'),
       tags: ['Ionic', 'IoT', 'Push Notifications', 'TypeScript'],
       color: Color(0xFF3B82F6),
-      url: 'https://github.com/sarab-2000',
+      url: '',
       overview: L(
         'Frontend mobile application built with Ionic for an IoT security platform focused on alarm systems and GPS trackers. Users register devices in the app, connect to them over the network, and apply remote configuration settings. When a device detects a tracked event or trigger, it sends data to the backend server, which forwards real-time push notifications to the user\'s phone.',
         'اپ موبایل Ionic برای پلتفرم IoT امنیتی — دزدگیر و ردیاب GPS. کاربران دستگاه‌ها را در اپ تعریف، به آن‌ها متصل و تنظیمات از راه دور اعمال می‌کنند. وقتی دستگاه رویداد یا trigger ردیابی را تشخیص دهد، داده به سرور ارسال و سرور push notification لحظه‌ای به موبایل کاربر می‌فرستد.',
@@ -559,7 +561,7 @@ class PortfolioData {
       category: L('Academic Web App', 'سامانه وب دانشگاهی'),
       tags: ['Django', 'React', 'DRF', 'JWT'],
       color: Color(0xFF7C3AED),
-      url: 'https://github.com/sarab-2000',
+      url: '',
       overview: L(
         'A full-stack web application developed as a master\'s degree thesis project. The platform manages application requests and admissions for gifted and outstanding students (استعدادهای درخشان) applying to MSc and PhD programs. Built with Django REST Framework on the backend and React on the frontend, it implements role-based access control across multiple user levels and secures all API endpoints with JWT authentication.',
         'اپ full-stack به عنوان پروژه کارشناسی ارشد. پلتفرم مدیریت درخواست‌ها و پذیرش دانشجویان استعدادهای درخشان در مقاطع کارشناسی ارشد و دکتری. بک‌اند Django REST Framework و فرانت React، کنترل دسترسی نقش‌محور در سطوح مختلف کاربر و امنیت API با JWT.',
@@ -591,7 +593,7 @@ class PortfolioData {
       category: L('Computer Vision / ML', 'بینایی ماشین / ML'),
       tags: ['YOLO', 'Python', 'OpenCV', 'PyTorch'],
       color: Color(0xFFEF4444),
-      url: 'https://github.com/sarab-2000',
+      url: '',
       overview: L(
         'A computer vision project focused on training a YOLO object detection model to identify and localize vehicle license plates. The workflow covers dataset preparation and labeling, model training and hyperparameter tuning, evaluation with precision/recall metrics, and inference on real-world images and video frames — enabling automated plate detection for traffic, parking, or security use cases.',
         'پروژه بینایی ماشین برای آموزش مدل تشخیص شیء YOLO جهت شناسایی و موقعیت‌یابی پلاک خودرو. شامل آماده‌سازی و label دیتاست، آموزش مدل و tuning، ارزیابی با precision/recall و inference روی تصویر و فریم ویدیو — برای کاربرد ترافیک، پارکینگ یا امنیت.',
@@ -623,7 +625,7 @@ class PortfolioData {
       category: L('Industrial Desktop App', 'اپ دسکتاپ صنعتی'),
       tags: ['Flutter', 'Excel', 'Jet Printer', 'Barcode Scanner'],
       color: Color(0xFF14B8A6),
-      url: 'https://github.com/sarab-2000',
+      url: '',
       overview: L(
         'A Flutter desktop application for production-line labeling workflows. Operators upload Excel files containing product data; the app parses rows and sends formatted print jobs to industrial Jet Printers. After printing, a barcode scanner verifies that the label was applied correctly — closing the loop between data import, print execution, and quality control.',
         'اپ دسکتاپ Flutter برای گردش کار لیبل‌گذاری خط تولید. اپراتور فایل Excel حاوی داده محصول را بارگذاری می‌کند؛ اپ سطرها را parse و دستور چاپ فرمت‌شده به Jet Printer صنعتی می‌فرستد. پس از چاپ، اسکنر بارکد صحت اعمال لیبل را بررسی می‌کند — بستن حلقه بین import داده، اجرای چاپ و کنترل کیفیت.',
@@ -658,7 +660,7 @@ class PortfolioData {
       category: L('Industrial Desktop App', 'اپ دسکتاپ صنعتی'),
       tags: ['Python', 'PySide', 'Barcode Scanner', 'Label Printer'],
       color: Color(0xFF64748B),
-      url: 'https://github.com/sarab-2000',
+      url: '',
       overview: L(
         'A lightweight Python desktop utility built with PySide for warehouse and production environments. A barcode scanner reads product or batch codes; based on mappings the user configures in advance, the system automatically formats and sends the corresponding label content to a connected printer — no manual copy-paste between systems.',
         'ابزار دسکتاپ سبک Python با PySide برای انبار و تولید. اسکنر بارکد کد محصول یا batch را می‌خواند؛ بر اساس mapping از پیش تعریف‌شده توسط کاربر، سیستم خودکار محتوای لیبل را فرمت و به پرینتر متصل ارسال می‌کند — بدون copy-paste دستی بین سیستم‌ها.',

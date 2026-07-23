@@ -14,6 +14,7 @@ class ProjectDetailScreen extends StatelessWidget {
   final ProjectItem project;
 
   Future<void> _openLiveUrl() async {
+    if (!project.hasLiveSite) return;
     final uri = Uri.parse(project.url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.externalApplication);
@@ -548,15 +549,17 @@ class _SidePanel extends StatelessWidget {
           _DetailRow(l10n.detailRole, project.myRole.of(context)),
           _DetailRow(l10n.detailDuration, project.duration.of(context)),
           _DetailRow(l10n.detailCategory, project.category.of(context)),
-          const SizedBox(height: 24),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton.icon(
-              onPressed: onVisit,
-              icon: const Icon(Icons.open_in_new, size: 18),
-              label: Text(l10n.visitLiveSite),
+          if (project.hasLiveSite) ...[
+            const SizedBox(height: 24),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: onVisit,
+                icon: const Icon(Icons.open_in_new, size: 18),
+                label: Text(l10n.visitLiveSite),
+              ),
             ),
-          ),
+          ],
         ],
       ),
     ).animate().fadeIn(delay: 400.ms);
@@ -634,6 +637,7 @@ class _ProjectNavigation extends StatelessWidget {
                   ),
                 );
               },
+              iconAlignment: IconAlignment.end,
               icon: const Icon(Icons.arrow_forward, size: 18),
               label: Text(l10n.nextProject),
             ),
