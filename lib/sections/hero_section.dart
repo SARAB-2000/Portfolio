@@ -87,7 +87,9 @@ class HeroSection extends StatelessWidget {
         ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.3, end: 0),
         const SizedBox(height: 8),
         Text(
-          '${l10n.heroGreeting} ${profile.name}',
+          Localizations.localeOf(context).languageCode == 'fa'
+              ? l10n.heroGreeting
+              : '${l10n.heroGreeting} ${profile.name}',
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
                 color: colors.textSecondary,
                 fontWeight: FontWeight.w500,

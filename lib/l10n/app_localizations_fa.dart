@@ -42,7 +42,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get navContact => 'تماس';
 
   @override
-  String get heroGreeting => 'من';
+  String get heroGreeting => 'من علی بازیار هستم';
 
   @override
   String get heroCtaProjects => 'نمونه کارها';

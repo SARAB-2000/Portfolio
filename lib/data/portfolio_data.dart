@@ -226,7 +226,7 @@ class PortfolioData {
     ),
     tagline: L(
       'I build Python automation tools, Django business apps, AI integrations, and workflow systems — with fixed scope, clear updates, and production-ready delivery.',
-      'ابزارهای خودکارسازی پایتون، وب‌اپ‌های جنگو، یکپارچه‌سازی هوش مصنوعی و سامانه‌های گردش کار — با محدوده مشخص، گزارش‌دهی شفاف و تحویل آماده بهره‌برداری.',
+      'من ابزارهای خودکارسازی پایتون، وب‌اپ‌های جنگو، یکپارچه‌سازی هوش مصنوعی و سامانه‌های گردش کار می‌سازم؛ با محدوده مشخص، گزارش‌دهی شفاف و تحویل آماده بهره‌برداری.',
     ),
     bio: L(
       'I\'m Ali Baziar — I work with small business owners and startup founders who need reliable systems, not another developer who disappears mid-project.\n\nI\'ve delivered production systems for real companies: inventory tracking from factory to warehouse, digital approval workflows that replaced paper forms, AI-powered platforms, and desktop tools that connect Excel, scanners, and printers.\n\nBefore we start, you get a clear scope and fixed price. During the project, regular updates in plain English. After delivery, working code with documentation you can actually use.\n\nProjects from \$50 automation scripts to full business applications. If manual work is slowing your business down, let\'s talk.',
@@ -252,14 +252,14 @@ class PortfolioData {
 
   static const heroStats = [
     HeroStatItem(
-      value: 10,
-      label: L('Systems Delivered', 'پروژه تحویل‌داده‌شده'),
+      value: 13,
+      label: L('Projects Delivered', 'پروژه تحویل‌داده‌شده'),
       icon: Icons.business_center_rounded,
     ),
     HeroStatItem(
-      value: 5,
-      label: L('Live in Production', 'فعال در بهره‌برداری'),
-      icon: Icons.cloud_done_rounded,
+      value: 6,
+      label: L('Years Experience', 'سال تجربه'),
+      icon: Icons.work_history_rounded,
     ),
     HeroStatItem(
       value: 24,
