@@ -44,7 +44,16 @@ class ContactSection extends StatelessWidget {
             title: l10n.sectionContact,
             subtitle: l10n.sectionContactSubtitle,
           ).animate().fadeIn().slideY(begin: 0.2, end: 0),
-          const SizedBox(height: 48),
+          const SizedBox(height: 12),
+          Text(
+            l10n.contactResponseTime,
+            style: TextStyle(
+              color: AppTheme.accent,
+              fontWeight: FontWeight.w600,
+              fontSize: 14,
+            ),
+          ).animate().fadeIn(delay: 80.ms),
+          const SizedBox(height: 36),
           Center(
             child: Wrap(
               alignment: WrapAlignment.center,
@@ -236,11 +245,13 @@ class FooterSection extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'Built with Flutter 💙',
+            l10n.footerTagline,
             style: TextStyle(
-              color: colors.textSecondary.withValues(alpha: 0.6),
-              fontSize: 12,
+              color: colors.textSecondary.withValues(alpha: 0.8),
+              fontSize: 13,
+              fontWeight: FontWeight.w500,
             ),
+            textAlign: TextAlign.center,
           ),
         ],
       ),

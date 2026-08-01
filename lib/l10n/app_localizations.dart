@@ -101,7 +101,7 @@ abstract class AppLocalizations {
   /// No description provided for @appTitle.
   ///
   /// In en, this message translates to:
-  /// **'Portfolio'**
+  /// **'Ali Baziar'**
   String get appTitle;
 
   /// No description provided for @navHome.
@@ -109,6 +109,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Home'**
   String get navHome;
+
+  /// No description provided for @navAbout.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get navAbout;
+
+  /// No description provided for @navServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Services'**
+  String get navServices;
 
   /// No description provided for @navProjects.
   ///
@@ -158,40 +170,76 @@ abstract class AppLocalizations {
   /// **'View Projects'**
   String get heroCtaProjects;
 
+  /// No description provided for @heroCtaServices.
+  ///
+  /// In en, this message translates to:
+  /// **'See Services'**
+  String get heroCtaServices;
+
   /// No description provided for @heroCtaContact.
   ///
   /// In en, this message translates to:
-  /// **'Get in Touch'**
+  /// **'Discuss Your Project'**
   String get heroCtaContact;
 
   /// No description provided for @heroAvailable.
   ///
   /// In en, this message translates to:
-  /// **'Available for work'**
+  /// **'Available for freelance projects'**
   String get heroAvailable;
+
+  /// No description provided for @sectionAbout.
+  ///
+  /// In en, this message translates to:
+  /// **'About Me'**
+  String get sectionAbout;
+
+  /// No description provided for @sectionAboutSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Business-focused Python developer for small teams and startups'**
+  String get sectionAboutSubtitle;
+
+  /// No description provided for @sectionServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Services'**
+  String get sectionServices;
+
+  /// No description provided for @sectionServicesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Fixed-scope packages for small businesses and startups'**
+  String get sectionServicesSubtitle;
+
+  /// No description provided for @servicesCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Discuss Your Project'**
+  String get servicesCta;
 
   /// No description provided for @sectionProjects.
   ///
   /// In en, this message translates to:
-  /// **'Selected Work'**
+  /// **'Business Projects'**
   String get sectionProjects;
 
   /// No description provided for @sectionProjectsSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Projects that showcase my craft'**
+  /// **'Real systems built for real business problems'**
   String get sectionProjectsSubtitle;
 
   /// No description provided for @sectionSkills.
   ///
   /// In en, this message translates to:
-  /// **'Skills & Tools'**
+  /// **'Technologies I Use'**
   String get sectionSkills;
 
   /// No description provided for @sectionSkillsSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Technologies I work with daily'**
+  /// **'The stack behind the solutions — not the selling point'**
   String get sectionSkillsSubtitle;
 
   /// No description provided for @sectionExperience.
@@ -203,7 +251,7 @@ abstract class AppLocalizations {
   /// No description provided for @sectionExperienceSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'My professional journey'**
+  /// **'Production systems delivered for real companies'**
   String get sectionExperienceSubtitle;
 
   /// No description provided for @sectionEducation.
@@ -239,13 +287,13 @@ abstract class AppLocalizations {
   /// No description provided for @sectionContact.
   ///
   /// In en, this message translates to:
-  /// **'Let\'s Connect'**
+  /// **'Start a Project'**
   String get sectionContact;
 
   /// No description provided for @sectionContactSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Reach out via email or social media'**
+  /// **'Tell me about your workflow problem — I reply within 24 hours'**
   String get sectionContactSubtitle;
 
   /// No description provided for @contactEmail.
@@ -259,6 +307,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Location'**
   String get contactLocation;
+
+  /// No description provided for @contactResponseTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Typical response time: within 24 hours'**
+  String get contactResponseTime;
 
   /// No description provided for @contactSendMessage.
   ///
@@ -290,10 +344,16 @@ abstract class AppLocalizations {
   /// **'All rights reserved.'**
   String get footerRights;
 
+  /// No description provided for @footerTagline.
+  ///
+  /// In en, this message translates to:
+  /// **'Open to small projects & long-term work'**
+  String get footerTagline;
+
   /// No description provided for @viewProject.
   ///
   /// In en, this message translates to:
-  /// **'View Project'**
+  /// **'View Case Study'**
   String get viewProject;
 
   /// No description provided for @viewAllProjects.
@@ -347,19 +407,19 @@ abstract class AppLocalizations {
   /// No description provided for @caseChallenge.
   ///
   /// In en, this message translates to:
-  /// **'The Challenge'**
+  /// **'The Problem'**
   String get caseChallenge;
 
   /// No description provided for @caseSolution.
   ///
   /// In en, this message translates to:
-  /// **'The Solution'**
+  /// **'What I Built'**
   String get caseSolution;
 
   /// No description provided for @caseResults.
   ///
   /// In en, this message translates to:
-  /// **'Results & Impact'**
+  /// **'Business Value & Results'**
   String get caseResults;
 
   /// No description provided for @projectDetails.
@@ -427,6 +487,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count} skills'**
   String skillsCount(int count);
+
+  /// No description provided for @mobileContactFab.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact'**
+  String get mobileContactFab;
 }
 
 class _AppLocalizationsDelegate

@@ -25,7 +25,7 @@ class PortfolioNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final colors = context.colors;
-    final isWide = MediaQuery.sizeOf(context).width > 1100;
+    final isWide = MediaQuery.sizeOf(context).width > 900;
     final isDark = context.watch<ThemeProvider>().isDark;
 
     return AnimatedContainer(
@@ -72,11 +72,10 @@ class PortfolioNavBar extends StatelessWidget {
             const SizedBox(width: 28),
             Row(
               children: [
+                _NavLink(l10n.navAbout, () => onNavTap('about')),
+                _NavLink(l10n.navServices, () => onNavTap('services')),
                 _NavLink(l10n.navProjects, () => onNavTap('projects')),
-                _NavLink(l10n.navSkills, () => onNavTap('skills')),
                 _NavLink(l10n.navExperience, () => onNavTap('experience')),
-                _NavLink(l10n.navEducation, () => onNavTap('education')),
-                // _NavLink(l10n.navTestimonials, () => onNavTap('testimonials')),
                 _NavLink(l10n.navContact, () => onNavTap('contact')),
               ],
             ),
@@ -139,7 +138,7 @@ class _NavLinkState extends State<_NavLink> {
             style: TextStyle(
               color: _hovered ? colors.textPrimary : colors.textSecondary,
               fontWeight: FontWeight.w500,
-              fontSize: 14,
+              fontSize: 13,
             ),
           ),
         ),

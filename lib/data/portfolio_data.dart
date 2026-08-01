@@ -49,11 +49,13 @@ class HeroStatItem {
     required this.value,
     required this.label,
     required this.icon,
+    this.showPlus = true,
   });
 
   final int value;
   final L label;
   final IconData icon;
+  final bool showPlus;
 }
 
 class ProjectItem {
@@ -179,20 +181,39 @@ class TestimonialItem {
   final String avatarInitials;
 }
 
+class ServiceItem {
+  const ServiceItem({
+    required this.title,
+    required this.description,
+    required this.problems,
+    required this.icon,
+    required this.color,
+  });
+
+  final L title;
+  final L description;
+  final List<L> problems;
+  final IconData icon;
+  final Color color;
+}
+
 class PortfolioData {
   static const profile = PortfolioProfile(
     name: 'Ali Baziar',
-    role: L('Full-Stack Developer', 'توسعه‌دهنده فول‌استک'),
+    role: L(
+      'Python Automation & AI Integration Developer',
+      'توسعه‌دهنده Python — اتوماسیون و یکپارچه‌سازی AI',
+    ),
     tagline: L(
-      'I build scalable web and mobile apps — from Django backends to Flutter & React frontends.',
-      'اپلیکیشن‌های وب و موبایل مقیاس‌پذیر می‌سازم — از بک‌اند Django تا فرانت Flutter و React.',
+      'I help small businesses replace manual work with reliable Python systems — AI integrations, Django backends, and workflow automation that save time and reduce errors.',
+      'به کسب‌وکارهای کوچک کمک می‌کنم کارهای دستی را با سیستم‌های Python قابل اعتماد جایگزین کنند — یکپارچه‌سازی AI، بک‌اند Django و اتوماسیون گردش کار.',
     ),
     bio: L(
-      'Passionate full-stack developer with experience building web and mobile applications using Python, Django, Flutter, and React. I enjoy turning complex problems into simple, elegant solutions — with clean code and user-centered design.',
-      'توسعه‌دهنده فول‌استک با تجربه ساخت اپلیکیشن وب و موبایل با Python، Django، Flutter و React. از تبدیل مسائل پیچیده به راه‌حل‌های ساده و زیبا لذت می‌برم — با کد تمیز و طراحی کاربرمحور.',
+      'I\'m Ali Baziar, a Python developer focused on practical business solutions — not generic app development.\n\nOver the past several years, I\'ve built production systems for real companies: inventory tracking from factory floor to warehouse, digital approval workflows that replaced paper forms, AI-powered learning platforms, and desktop automation tools that connect Excel, barcode scanners, and industrial printers.\n\nI work best with small business owners and startup founders who need someone reliable to take a messy manual process and turn it into a working system. I communicate clearly in English, provide regular updates, and deliver on agreed scope — whether the project is a \$100 automation script or a multi-month Django application.\n\nIf you\'re losing time to spreadsheets, repetitive data entry, or disconnected tools, I can help you build something that actually runs your business smoother.',
+      'من علی بازيار هستم، توسعه‌دهنده Python با تمرکز بر راه‌حل‌های عملی کسب‌وکار — نه توسعه اپلیکیشن عمومی.\n\nدر چند سال گذشته برای شرکت‌های واقعی سیستم عملیاتی ساخته‌ام: رهگیری موجودی از خط تولید تا انبار، گردش کار تأیید دیجیتال به‌جای فرم کاغذی، پلتفرم یادگیری AI و ابزارهای اتوماسیون دسکتاپ که Excel، اسکنر بارکد و پرینتر صنعتی را به هم وصل می‌کنند.\n\nبا صاحبان کسب‌وکار کوچک و بنیان‌گذاران استارتاپ که به یک نفر قابل اعتماد برای تبدیل فرآیند دستی به سیستم کارآمد نیاز دارند، بهترین نتیجه را می‌گیرم. به انگلیسی شفاف ارتباط می‌گیرم، به‌روزرسانی منظم می‌دهم و طبق scope توافق‌شده تحویل می‌دهم.\n\nاگر وقت خود را با Excel، ورود داده تکراری یا ابزارهای جدا از هم از دست می‌دهید، می‌توانم کمک کنم کاری بسازید که واقعاً کسب‌وکار را روان‌تر کند.',
     ),
     email: 'alibaziar1378@gmail.com',
-    location: L('Iran', 'ایران'),
+    location: L('Iran · Remote worldwide', 'ایران · دورکاری بین‌المللی'),
     avatarAsset: 'assets/images/profile.png',
     avatarUrl: '',
     socialLinks: [
@@ -211,16 +232,64 @@ class PortfolioData {
 
   static const heroStats = [
     HeroStatItem(
-      value: 7,
-      label: L('Years Experience', 'سال تجربه'),
-      icon: Icons.work_history_rounded,
+      value: 10,
+      label: L('Business Systems', 'سیستم کسب‌وکار'),
+      icon: Icons.business_center_rounded,
     ),
     HeroStatItem(
-      value: 13,
-      label: L('Projects Completed', 'پروژه انجام‌شده'),
-      icon: Icons.rocket_launch_rounded,
+      value: 5,
+      label: L('Live Deployments', 'استقرار عملیاتی'),
+      icon: Icons.cloud_done_rounded,
+    ),
+    HeroStatItem(
+      value: 24,
+      label: L('Hour Response', 'ساعت پاسخ'),
+      icon: Icons.schedule_rounded,
+      showPlus: false,
     ),
   ];
+
+  static const workHighlights = [
+    L(
+      'Clear scope and fixed price before starting',
+      'scope شفاف و قیمت ثابت قبل از شروع',
+    ),
+    L(
+      'Regular updates in plain English',
+      'به‌روزرسانی منظم به زبان ساده',
+    ),
+    L(
+      'Small projects welcome — from \$50 automation scripts',
+      'پروژه‌های کوچک هم پذیرفته می‌شود — از اسکریپت \$50',
+    ),
+  ];
+
+  static const pricingNote = L(
+    'Starting from \$50 for focused automation tasks · Fixed price · Clear scope · Documentation included',
+    'شروع از \$50 برای اتوماسیون متمرکز · قیمت ثابت · scope مشخص · همراه مستندات',
+  );
+
+  static List<ProjectItem> get orderedProjects {
+    const featuredOrder = [
+      'ai-language-learning',
+      'product-tracking',
+      'warehouse-management',
+      'business-automation-suite',
+    ];
+    final byId = {for (final p in projects) p.id: p};
+    final ordered = <ProjectItem>[];
+    for (final id in featuredOrder) {
+      final project = byId[id];
+      if (project != null) ordered.add(project);
+    }
+    for (final p in projects) {
+      if (!featuredOrder.contains(p.id)) ordered.add(p);
+    }
+    return ordered;
+  }
+
+  static List<ProjectItem> get featuredProjects =>
+      orderedProjects.where((p) => p.isFeatured).toList();
 
   static ProjectItem? projectById(String id) {
     try {
@@ -232,33 +301,70 @@ class PortfolioData {
 
   static const projects = [
     ProjectItem(
+      id: 'ai-language-learning',
+      title: L('AI Language Learning Platform', 'پلتفرم یادگیری زبان با هوش مصنوعی'),
+      description: L(
+        'AI-powered learning platform where educators create courses, attach intelligent chat assistants, and earn from their content.',
+        'پلتفرم یادگیری AI که مدرسان دوره می‌سازند، دستیار چت هوشمند اضافه می‌کنند و از محتوای خود درآمد کسب می‌کنند.',
+      ),
+      category: L('AI Business Application', 'اپلیکیشن AI کسب‌وکار'),
+      tags: ['Django', 'AI APIs', 'REST API', 'MySQL'],
+      color: Color(0xFF6366F1),
+      url: '',
+      overview: L(
+        'Backend platform for an AI-driven language learning application. Educators build structured courses — comprehensive programs, grammar, reading, and more — and attach intelligent assistants to each course. Assistant bots answer learner questions via chat, while specialized teaching bots drill vocabulary and grammar. Learners discover and enroll in published courses. A monetization system lets creators earn revenue from their content.',
+        'بک‌اند پلتفرم یادگیری زبان مبتنی بر AI. مدرسان دوره‌های ساختاریافته می‌سازند و به هر دوره دستیار هوشمند اضافه می‌کنند. ربات دستیار در چت به سوالات پاسخ می‌دهد؛ ربات‌های آموزشی برای لغت و گرامر تمرین می‌دهند. کاربران دوره‌ها را کشف و استفاده می‌کنند. سیستم درآمدزایی برای سازندگان محتوا پیاده‌سازی شده است.',
+      ),
+      challenge: L(
+        'Language learners needed personalized, interactive practice beyond static lessons. Educators wanted to monetize AI-enhanced courses but lacked the technical infrastructure to build assistants, course structures, and payment flows from scratch.',
+        'زبان‌آموزان به تمرین تعاملی و شخصی‌سازی‌شده فراتر از درس ثابت نیاز داشتند. مدرسان می‌خواستند از دوره‌های AI درآمد بگیرند اما زیرساخت فنی نداشتند.',
+      ),
+      solution: L(
+        'Built the backend with Django and integrated AI APIs for conversational assistants and teaching bots. Implemented course creation workflows, per-course chat assistants, vocabulary and grammar bots, user enrollment, and a creator monetization engine — a marketplace-style learning ecosystem.',
+        'بک‌اند با Django و یکپارچه‌سازی AI API. گردش کار ساخت دوره، دستیار چت، ربات‌های آموزشی، ثبت‌نام کاربران و موتور درآمدزایی سازندگان.',
+      ),
+      results: L(
+        'Educators can launch and sell AI-enhanced courses without building infrastructure. Learners get 24/7 interactive tutoring. The monetization layer supports sustainable content creation.',
+        'مدرسان بدون ساخت زیرساخت، دوره AI می‌فروشند. یادگیرندگان آموزش تعاملی ۲۴/۷ می‌گیرند. درآمدزایی خلق محتوای پایدار را پشتیبانی می‌کند.',
+      ),
+      myRole: L('Backend Developer', 'توسعه‌دهنده بک‌اند'),
+      duration: L('Multi-phase', 'چند فازی'),
+      imageAsset: 'assets/images/projects/talkook1.png',
+      galleryAssets: [
+        'assets/images/projects/talkook2.png',
+        'assets/images/projects/talkook3.png',
+        'assets/images/projects/talkook4.png',
+      ],
+      isFeatured: true,
+    ),
+    ProjectItem(
       id: 'product-tracking',
       title: L('Product Tracking System', 'سامانه رهگیری محصولات'),
       description: L(
-        'End-to-end barcode tracking from production line to warehouse, distribution, and returns — with full analytics.',
-        'رهگیری end-to-end بارکد از خط تولید تا انبار، توزیع و مرجوعی — با آمارگیری کامل.',
+        'End-to-end product traceability from production line to warehouse, distribution, and returns — with barcode automation and real-time status.',
+        'ردیابی کامل محصول از خط تولید تا انبار، توزیع و مرجوعی — با اتوماسیون بارکد و وضعیت لحظه‌ای.',
       ),
-      category: L('Enterprise Web App', 'سامانه وب سازمانی'),
+      category: L('Inventory & Tracking System', 'سیستم رهگیری و موجودی'),
       tags: ['Django', 'Redis', 'Celery', 'MySQL'],
       color: Color(0xFF0D9488),
       url: '',
       overview: L(
-        'A comprehensive product traceability platform for manufacturing operations. The system generates unique 2D barcodes for each product unit based on product type and attributes, sends them to industrial Jet Printers for on-product labeling, and uses camera scanning on the production line. When the configured number of units per carton is reached, it automatically generates a unique master carton barcode and sends it to a label printer. Warehouse, distribution, and returns departments update product status by scanning these barcodes, with full reporting and analytics built in.',
-        'پلتفرم جامع ردیابی محصول برای عملیات تولید. برای هر واحد محصول بر اساس نوع و مشخصات، بارکد دوبعدی یونیک تولید می‌کند و به Jet Printer صنعتی برای چاپ روی محصول ارسال می‌کند. با اسکن دوربین در خط تولید، وقتی به تعداد تعریف‌شده در هر کارتن رسید، بارکد مادر یونیک کارتن ساخته و به label printer داده می‌شود. بخش‌های انبار، توزیع و مرجوعی با اسکن بارکدها وضعیت را به‌روز می‌کنند و گزارش‌گیری و آمار کامل در دسترس است.',
+        'A product traceability platform for a manufacturing business. The system generates unique 2D barcodes per unit, sends print jobs to industrial Jet Printers, scans units on the production line with cameras, auto-generates master carton barcodes when capacity is reached, and lets warehouse, distribution, and returns teams update status by scanning. Full reporting dashboard included.',
+        'پلتفرم ردیابی محصول برای عملیات تولید. بارکد دوبعدی یونیک، اتصال Jet Printer، اسکن خط تولید، ساخت خودکار بارکد کارتن و به‌روزرسانی وضعیت در انبار، توزیع و مرجوعی. داشبورد گزارش کامل.',
       ),
       challenge: L(
-        'Tracking products manually across production, packaging, warehouse, distribution, and returns caused labeling errors, lost inventory visibility, and no single source of truth for product status.',
-        'رهگیری دستی محصول در تولید، بسته‌بندی، انبار، توزیع و مرجوعی باعث خطای لیبل، از دست رفتن دید موجودی و نبود منبع واحد برای وضعیت محصول می‌شد.',
+        'The business tracked products manually across production, packaging, warehouse, distribution, and returns. Labeling errors, lost inventory visibility, and no single source of truth made it impossible to know where any unit was at any time.',
+        'رهگیری دستی باعث خطای لیبل، از دست رفتن دید موجودی و نبود منبع واحد برای وضعیت محصول می‌شد.',
       ),
       solution: L(
-        'Built with Django, Redis, Celery, and MySQL — dynamic QR/barcode generation rules per product type, Jet Printer and label printer integrations, camera-based scanning workflows, automatic master carton barcode creation when unit count per carton is met, and status management modules for warehouse, distribution, and returns with comprehensive analytics dashboards.',
-        'با Django، Redis، Celery و MySQL — قوانین پویا برای تولید QR/بارکد بر اساس نوع محصول، اتصال Jet Printer و label printer، گردش کار اسکن با دوربین، ساخت خودکار بارکد مادر کارتن در رسیدن به تعداد واحد، و ماژول‌های وضعیت برای انبار، توزیع و مرجوعی همراه داشبورد آمار.',
+        'Built with Django, Redis, Celery, and MySQL — dynamic barcode generation per product type, Jet Printer and label printer integrations, camera scanning workflows, automatic master carton barcode creation, and status modules for warehouse, distribution, and returns with analytics dashboards.',
+        'با Django، Redis، Celery و MySQL — تولید بارکد پویا، اتصال پرینتر، اسکن دوربین، ساخت خودکار بارکد کارتن و ماژول‌های وضعیت با داشبورد آمار.',
       ),
       results: L(
-        'Full traceability from production to returns, automated unit and carton labeling, real-time status updates across departments, and complete reporting for operational decisions.',
-        'ردیابی کامل از تولید تا مرجوعی، لیبل‌گذاری خودکار واحد و کارتن، به‌روزرسانی لحظه‌ای وضعیت بین بخش‌ها، و گزارش‌گیری کامل برای تصمیم‌گیری عملیاتی.',
+        'Full visibility from factory to customer return. Automated labeling eliminated manual errors. Real-time status updates replaced phone calls and spreadsheets. Operational reports enable data-driven decisions.',
+        'دید کامل از کارخانه تا مرجوعی. لیبل‌گذاری خودکار خطای دستی را حذف کرد. به‌روزرسانی لحظه‌ای جایگزین تماس و Excel شد.',
       ),
-      myRole: L('Full-Stack Developer', 'توسعه‌دهنده فول‌استک'),
+      myRole: L('Python Developer', 'توسعه‌دهنده Python'),
       duration: L('Production system', 'سیستم عملیاتی'),
       imageAsset: 'assets/images/projects/tracking1.jpg',
       galleryAssets: [
@@ -269,39 +375,82 @@ class PortfolioData {
       isFeatured: true,
     ),
     ProjectItem(
-      id: 'ai-language-learning',
-      title: L('AI Language Learning Platform', 'پلتفرم یادگیری زبان با هوش مصنوعی'),
+      id: 'warehouse-management',
+      title: L('Warehouse Management System', 'سامانه مدیریت انبار'),
       description: L(
-        'Django backend for an AI-powered language learning app — custom courses, chat assistants, and creator monetization.',
-        'بک‌اند Django برای اپ یادگیری زبان با AI — دوره سفارشی، دستیار چت و درآمدزایی برای سازندگان.',
+        'Multi-warehouse inventory system with role-based access, barcode/Excel intake, outbound tracking, and stock reports.',
+        'سیستم موجودی چندانباره با دسترسی نقش‌محور، ورود بارکد/Excel، رهگیری خروج و گزارش موجودی.',
       ),
-      category: L('EdTech Platform', 'پلتفرم آموزشی'),
-      tags: ['Django', 'AI APIs', 'REST API', 'MySQL'],
-      color: Color(0xFF6366F1),
+      category: L('Business Management System', 'سیستم مدیریت کسب‌وکار'),
+      tags: ['Django', 'REST API', 'Electron.js', 'MySQL'],
+      color: Color(0xFF059669),
       url: '',
       overview: L(
-        'Backend platform for an AI-driven language learning application. Users can create structured language courses — comprehensive programs, grammar, reading, and more — and attach intelligent assistants to each course. Assistant bots answer learner questions via chat about course content, while specialized teaching bots can drill vocabulary, grammar, and other skills. Other users discover and enroll in published courses and bots. The platform includes a monetization system so course and bot creators can earn revenue from their content.',
-        'بک‌اند پلتفرم اپ یادگیری زبان مبتنی بر هوش مصنوعی. کاربران دوره‌های ساختاریافته می‌سازند — دوره جامع، گرامر، ریدینگ و ... — و به هر دوره دستیار هوشمند تعیین می‌کنند. ربات دستیار در قالب چت به سوالات یادگیرندگان درباره محتوای دوره پاسخ می‌دهد؛ ربات‌های آموزشی هم برای کار روی لغات، گرامر و مهارت‌های دیگر ساخته می‌شوند. سایر کاربران دوره‌ها و ربات‌ها را کشف و استفاده می‌کنند. سیستم درآمدزایی برای سازندگان دوره و ربات هم پیاده‌سازی شده است.',
+        'A warehouse management platform with Django REST API and an Electron desktop client for daily operations. Supports multi-warehouse setup, role-based permissions, three product intake methods (manual, barcode scan, Excel import), outbound workflows for field experts and customers, return registration, and flexible stock and movement reports.',
+        'پلتفرم مدیریت انبار با Django REST API و کلاینت Electron. چند انبار، دسترسی نقش‌محور، ورود دستی/بارکد/Excel، گردش خروج و مرجوعی و گزارش انعطاف‌پذیر.',
       ),
       challenge: L(
-        'Language learners needed personalized, interactive content beyond static lessons — and educators lacked a platform to build, share, and monetize AI-enhanced courses without building everything from scratch.',
-        'زبان‌آموزان به محتوای تعاملی و شخصی‌سازی‌شده فراتر از درس‌های ثابت نیاز داشتند — و مدرسان پلتفرمی برای ساخت، اشتراک و درآمدزایی از دوره‌های AI-enhanced بدون ساخت همه‌چیز از صفر نداشتند.',
+        'The business managed warehouse stock in spreadsheets. Counts did not match reality, there was no barcode workflow, team permissions were unclear, and managers had no unified view of inbound, outbound, and return movements.',
+        'مدیریت انبار با Excel باعث مغایرت موجودی، نبود بارکد، مجوزهای نامشخص و نبود دید یکپارچه از گردش کالا می‌شد.',
       ),
       solution: L(
-        'Built the backend with Django and integrated AI APIs for conversational assistants and teaching bots. Implemented course creation workflows (comprehensive, grammar, reading, etc.), per-course chat assistants, specialized bots for vocabulary and grammar practice, user enrollment, and a creator monetization engine — enabling a marketplace-style learning ecosystem.',
-        'بک‌اند با Django و یکپارچه‌سازی AI API برای دستیار مکالمه‌ای و ربات‌های آموزشی. گردش کار ساخت دوره (جامع، گرامر، ریدینگ و ...)، دستیار چت برای هر دوره، ربات‌های تخصصی لغت و گرامر، ثبت‌نام کاربران و موتور درآمدزایی سازندگان — اکوسیستم یادگیری شبیه marketplace.',
+        'Developed Django REST API with role-based access control, Electron desktop UI, triple intake modes (manual, barcode, Excel bulk import), outbound and return workflows, configurable user/warehouse limits, and reporting by stock, date range, and movement type.',
+        'REST API با کنترل دسترسی، UI Electron، سه روش ورود، گردش خروج و مرجوعی، سقف کاربر/انبار و گزارش‌گیری.',
       ),
       results: L(
-        'Creators can publish courses and bots, learners get AI-powered interactive tutoring, and the monetization layer supports sustainable content creation on the platform.',
-        'سازندگان دوره و ربات منتشر می‌کنند، یادگیرندگان آموزش تعاملی با AI می‌گیرند و لایه درآمدزایی خلق محتوای پایدار را پشتیبانی می‌کند.',
+        'Accurate real-time inventory across warehouses. Faster intake via barcode and Excel. Controlled access per role. Actionable reports replaced manual stock reconciliation.',
+        'موجودی لحظه‌ای دقیق. ورود سریع‌تر. دسترسی کنترل‌شده. گزارش‌های عملیاتی جایگزین تطبیق دستی.',
       ),
-      myRole: L('Backend Developer', 'توسعه‌دهنده بک‌اند'),
+      myRole: L('Python Developer', 'توسعه‌دهنده Python'),
       duration: L('Multi-phase', 'چند فازی'),
-      imageAsset: 'assets/images/projects/talkook1.png',
+      imageAsset: 'assets/images/projects/warehouse1.png',
       galleryAssets: [
-        'assets/images/projects/talkook2.png',
-        'assets/images/projects/talkook3.png',
-        'assets/images/projects/talkook4.png',
+        'assets/images/projects/warehouse2.png',
+        'assets/images/projects/warehouse3.png',
+        'assets/images/projects/warehouse4.png',
+        'assets/images/projects/warehouse5.png',
+        'assets/images/projects/warehouse6.png',
+      ],
+      isFeatured: true,
+    ),
+    ProjectItem(
+      id: 'business-automation-suite',
+      title: L('Business Process Automation Suite', 'مجموعه اتوماسیون فرآیند کسب‌وکار'),
+      description: L(
+        'Web and desktop automation tools that digitize paper workflows, connect Excel to industrial printers, and trigger label printing from barcode scans.',
+        'ابزارهای وب و دسکتاپ برای دیجیتالی‌سازی فرم کاغذی، اتصال Excel به پرینتر صنعتی و چاپ لیبل با اسکن بارکد.',
+      ),
+      category: L('Workflow Automation', 'اتوماسیون گردش کار'),
+      tags: ['Python', 'Django', 'Flutter', 'PySide', 'SMS API'],
+      color: Color(0xFF8B5CF6),
+      url: 'https://supishi.net',
+      overview: L(
+        'A suite of automation tools built for field operations and production lines:\n\n1. Mission Form Platform — Replaced paper mission forms with a Django web app. Field staff submit digital forms; SMS notifies client managers for approval; staged workflow through support and department heads to archive. Live at supishi.net.\n\n2. Excel-to-Jet-Printer App — Flutter desktop app reads Excel product data, sends print jobs to industrial Jet Printers, and verifies each label with a barcode scanner.\n\n3. Barcode-Triggered Label Printer — Python/PySide tool: scan a barcode → system instantly prints the pre-configured label.',
+        'مجموعه ابزار اتوماسیون:\n\n۱. پلتفرم فرم مأموریت — جایگزین فرم کاغذی با وب‌اپ Django، تأیید SMS و گردش کار چندمرحله‌ای. live: supishi.net\n\n۲. اپ Excel به Jet Printer — خواندن Excel، چاپ صنعتی و تأیید با اسکنر.\n\n۳. چاپ لیبل با محرک بارکد — Python/PySide: یک اسکن، یک لیبل.',
+      ),
+      challenge: L(
+        'Small businesses lost hours on repetitive manual tasks: paper forms waiting for multi-party approval, copying Excel data to label printers, and re-typing barcode values for every label. Slow, error-prone, and impossible to scale.',
+        'ساعت‌ها وقت روی کار تکراری: فرم کاغذی، کپی Excel به پرینتر و ورود دستی بارکد — کند، خطاپذیر و غیرقابل مقیاس.',
+      ),
+      solution: L(
+        'Built three connected automation tools with Django, Flutter, and PySide — digital form submission with SMS-triggered approvals, Excel-to-printer pipeline with scan verification, and one-scan-one-label desktop workflow with configurable barcode mappings.',
+        'سه ابزار با Django، Flutter و PySide — فرم دیجیتال با SMS، خط لوله Excel تا پرینتر با تأیید اسکن، و گردش یک اسکن یک لیبل.',
+      ),
+      results: L(
+        'Paperless mission documentation with faster client approvals. Automated labeling eliminated manual data entry. Verified print quality on every production unit. Traceable workflows at every approval stage.',
+        'مستندسازی بدون کاغذ، تأیید سریع‌تر، حذف ورود دستی، تأیید کیفیت چاپ و گردش کار قابل ردیابی.',
+      ),
+      myRole: L('Python Developer', 'توسعه‌دهنده Python'),
+      duration: L('Production systems', 'سیستم‌های عملیاتی'),
+      imageAsset: 'assets/images/projects/supishi1.png',
+      galleryAssets: [
+        'assets/images/projects/supishi2.png',
+        'assets/images/projects/supishi3.png',
+        'assets/images/projects/supishi4.png',
+        'assets/images/projects/nitka1.png',
+        'assets/images/projects/nitka2.png',
+        'assets/images/projects/MardeKoohestan1.png',
+        'assets/images/projects/MardeKoohestan2.png',
       ],
       isFeatured: true,
     ),
@@ -340,7 +489,7 @@ class PortfolioData {
         'assets/images/projects/supishi3.png',
         'assets/images/projects/supishi4.png',
       ],
-      isFeatured: true,
+      isFeatured: false,
     ),
     ProjectItem(
       id: 'developer-portfolio',
@@ -372,45 +521,6 @@ class PortfolioData {
       myRole: L('Full-Stack Developer & Designer', 'توسعه‌دهنده فول‌استک و طراح'),
       duration: L('Personal project', 'پروژه شخصی'),
       imageAsset: 'assets/images/projects/portfolio.png',
-      isFeatured: true,
-    ),
-    ProjectItem(
-      id: 'warehouse-management',
-      title: L('Warehouse Management System', 'سامانه مدیریت انبار'),
-      description: L(
-        'Django REST API + Electron desktop app for multi-warehouse inventory — role-based access, barcode/Excel intake, and rich reporting.',
-        'REST API جنگو + اپ دسکتاپ Electron برای موجودی چندانباره — دسترسی نقش‌محور، ورود با بارکد/اکسل و گزارش‌گیری.',
-      ),
-      category: L('Inventory System', 'سامانه انبارداری'),
-      tags: ['Django', 'REST API', 'Electron.js', 'MySQL'],
-      color: Color(0xFF059669),
-      url: '',
-      overview: L(
-        'A full-stack warehouse management platform built with Django REST API and an Electron.js desktop client. The system supports multiple access levels, each with dedicated permissions. Users can add products to warehouses individually, via unique barcodes, or by uploading Excel files. Outbound operations — delivery to field experts or direct delivery to customers — and product returns are fully tracked. Administrators can set limits on the number of users and warehouses per account. Comprehensive reports include current stock levels, inbound/outbound activity within custom date ranges, and more.',
-        'پلتفرم full-stack مدیریت انبار با Django REST API و کلاینت دسکتاپ Electron.js. سطح دسترسی‌های مختلف با مجوزهای اختصاصی. ورود محصول به انبار به صورت تکی، با بارکد یونیک، یا آپلود فایل Excel. ثبت خروج (تحویل به کارشناس یا مشتری) و مرجوعی. محدودیت تعداد کاربر و تعداد انبار قابل تنظیم است. گزارش‌ها: موجودی فعلی، ورود/خروج در بازه زمانی و موارد دیگر.',
-      ),
-      challenge: L(
-        'Manual warehouse tracking with spreadsheets led to stock discrepancies, no barcode support, unclear permissions across teams, and no unified view of inbound, outbound, and return flows.',
-        'ردیابی دستی انبار با Excel باعث مغایرت موجودی، نبود پشتیبانی بارکد، مجوزهای نامشخص بین تیم‌ها و نبود دید یکپارچه از ورود، خروج و مرجوعی می‌شد.',
-      ),
-      solution: L(
-        'Developed Django REST API with granular role-based access control, Electron desktop UI for daily operations, triple product intake modes (manual, barcode scan, Excel bulk import), outbound workflows for expert and customer delivery, return registration, configurable user/warehouse quotas, and flexible reporting by stock, time range, and movement type.',
-        'REST API جنگو با کنترل دسترسی نقش‌محور دقیق، UI دسکتاپ Electron برای عملیات روزانه، سه روش ورود (دستی، اسکن بارکد، import اکسل)، گردش خروج به کارشناس و مشتری، ثبت مرجوعی، سقف کاربر/انبار قابل تنظیم، و گزارش‌گیری انعطاف‌پذیر بر اساس موجودی، بازه زمانی و نوع حرکت.',
-      ),
-      results: L(
-        'Accurate real-time inventory across multiple warehouses, faster intake with barcode and Excel, controlled access per role, and actionable reports for stock and movement analysis.',
-        'موجودی لحظه‌ای دقیق در چند انبار، ورود سریع‌تر با بارکد و Excel، دسترسی کنترل‌شده بر اساس نقش، و گزارش‌های عملیاتی برای تحلیل موجودی و گردش کالا.',
-      ),
-      myRole: L('Full-Stack Developer', 'توسعه‌دهنده فول‌استک'),
-      duration: L('Multi-phase', 'چند فازی'),
-      imageAsset: 'assets/images/projects/warehouse1.png',
-      galleryAssets: [
-        'assets/images/projects/warehouse2.png',
-        'assets/images/projects/warehouse3.png',
-        'assets/images/projects/warehouse4.png',
-        'assets/images/projects/warehouse5.png',
-        'assets/images/projects/warehouse6.png',
-      ],
       isFeatured: false,
     ),
     ProjectItem(
@@ -449,7 +559,7 @@ class PortfolioData {
         'assets/images/projects/ramodis4.png',
       ],
       portraitCover: true,
-      isFeatured: true,
+      isFeatured: false,
     ),
     ProjectItem(
       id: 'flutter-music-player',
@@ -581,7 +691,7 @@ class PortfolioData {
       myRole: L('Full-Stack Developer (Thesis)', 'توسعه‌دهنده فول‌استک (پایان‌نامه)'),
       duration: L('Master\'s thesis', 'کارشناسی ارشد'),
       imageAsset: 'assets/images/projects/gifted-students.jpg',
-      isFeatured: true,
+      isFeatured: false,
     ),
     ProjectItem(
       id: 'yolo-license-plate',
@@ -613,7 +723,7 @@ class PortfolioData {
       myRole: L('ML Engineer', 'مهندس یادگیری ماشین'),
       duration: L('Research project', 'پروژه تحقیقاتی'),
       imageAsset: 'assets/images/projects/plate_detection1.jpg',
-      isFeatured: true,
+      isFeatured: false,
     ),
     ProjectItem(
       id: 'jet-printer-excel-flutter',
@@ -739,18 +849,17 @@ class PortfolioData {
   static const experiences = [
     ExperienceItem(
       company: 'Supishi',
-      role: L('Full-Stack Developer', 'توسعه‌دهنده فول‌استک'),
+      role: L('Python Developer', 'توسعه‌دهنده Python'),
       period: L('Jul 2024 — Present', 'تیر ۱۴۰۳ — اکنون'),
       description: L(
-        'Full-stack developer at Supishi (UK Domino\'s franchise). Built the product tracking and warehouse management platform, the mission form digitization web app (supishi.net), a Flutter app that reads Excel files and drives Jet Printers with scan verification, and a PySide desktop tool where barcode scans trigger predefined label prints.',
-        'توسعه‌دهنده فول‌استک در سوپیشی (نمایندگی دومینوی انگلستان). ساخت سامانه رهگیری و مدیریت محصول، وب‌اپ دیجیتال‌سازی فرم مأموریت (supishi.net)، اپ Flutter برای خواندن Excel و چاپ Jet Printer با تأیید اسکنر، و ابزار دسکتاپ PySide که با اسکن بارکد، چاپ لیبل از پیش تعریف‌شده را اجرا می‌کند.',
+        'Python developer at Supishi (UK Domino\'s franchise). Built product tracking and warehouse management systems, mission form digitization (supishi.net), Excel-to-Jet-Printer automation, and barcode-triggered label printing tools.',
+        'توسعه‌دهنده Python در سوپیشی. ساخت سامانه رهگیری و انبار، دیجیتال‌سازی فرم مأموریت (supishi.net)، اتوماسیون Excel به Jet Printer و چاپ لیبل با اسکن بارکد.',
       ),
       isCurrent: true,
       relatedProjectIds: [
         'product-tracking',
-        'supishi-mission-forms',
-        'jet-printer-excel-flutter',
-        'barcode-label-print-pyside',
+        'warehouse-management',
+        'business-automation-suite',
       ],
       websiteUrl: 'https://supishi.net',
     ),
@@ -857,17 +966,131 @@ class PortfolioData {
     'Python',
     'Django',
     'DRF',
-    'Flutter',
-    'React',
-    'YOLO',
-    'OpenCV',
-    'JavaScript',
-    'Redis',
-    'Celery',
+    'AI APIs',
+    'Automation',
     'MySQL',
-    'PostgreSQL',
-    'Ionic',
-    'Docker',
+    'Redis',
+    'React',
+    'Flutter',
+    'OpenCV',
     'Git',
+  ];
+
+  static const services = [
+    ServiceItem(
+      title: L('AI Automation Solutions', 'راه‌حل‌های اتوماسیون AI'),
+      description: L(
+        'Custom AI integrations that automate repetitive business tasks — chat assistants, document processing, and smart workflows connected to your existing tools.',
+        'یکپارچه‌سازی AI سفارشی برای خودکارسازی کارهای تکراری — دستیار چت، پردازش سند و گردش کار هوشمند.',
+      ),
+      problems: [
+        L(
+          '"I want an AI assistant that answers customer questions based on my product docs"',
+          '«می‌خواهم دستیار AI سوالات مشتری را بر اساس مستندات محصول پاسخ دهد»',
+        ),
+        L(
+          '"We manually copy data from emails into our system every day"',
+          '«هر روز دستی داده را از ایمیل به سیستم کپی می‌کنیم»',
+        ),
+        L(
+          '"I need AI-powered content generation inside my existing Django app"',
+          '«به تولید محتوای AI داخل اپ Django موجود نیاز دارم»',
+        ),
+      ],
+      icon: Icons.psychology_outlined,
+      color: Color(0xFF6366F1),
+    ),
+    ServiceItem(
+      title: L('Python Web Scraping & Data Automation', 'Web Scraping و اتوماسیون داده'),
+      description: L(
+        'Automated scripts that collect, clean, and deliver data from websites or APIs — scheduled runs, Excel/CSV output, and direct database integration.',
+        'اسکریپت خودکار برای جمع‌آوری، پاکسازی و تحویل داده از وب/API — اجرای زمان‌بندی‌شده و خروجی Excel/CSV.',
+      ),
+      problems: [
+        L(
+          '"I spend 2 hours daily copying prices from competitor websites"',
+          '«هر روز ۲ ساعت قیمت رقبا را دستی کپی می‌کنم»',
+        ),
+        L(
+          '"I need product data extracted from 50 URLs into a spreadsheet every week"',
+          '«هر هفته داده ۵۰ URL را در Excel می‌خواهم»',
+        ),
+        L(
+          '"Our team manually updates inventory from supplier portals"',
+          '«تیم دستی موجودی را از پورتال تأمین‌کننده به‌روز می‌کند»',
+        ),
+      ],
+      icon: Icons.cloud_download_outlined,
+      color: Color(0xFF0D9488),
+    ),
+    ServiceItem(
+      title: L('Django Backend Development', 'توسعه بک‌اند Django'),
+      description: L(
+        'Custom Django web applications for internal business operations — dashboards, admin panels, user management, and REST APIs your team can rely on daily.',
+        'وب‌اپ Django سفارشی برای عملیات داخلی — داشبورد، پنل مدیریت، کاربران و REST API.',
+      ),
+      problems: [
+        L(
+          '"We track everything in Google Sheets and it\'s breaking"',
+          '«همه‌چیز در Google Sheets است و دارد از هم می‌پاشد»',
+        ),
+        L(
+          '"I need an internal tool for my team to manage orders and customers"',
+          '«به ابزار داخلی برای مدیریت سفارش و مشتری نیاز دارم»',
+        ),
+        L(
+          '"Our approval process is email chains — I need a proper workflow"',
+          '«تأییدها زنجیره ایمیل است — به گردش کار درست نیاز دارم»',
+        ),
+      ],
+      icon: Icons.dns_outlined,
+      color: Color(0xFF059669),
+    ),
+    ServiceItem(
+      title: L('Business Management Systems', 'سیستم‌های مدیریت کسب‌وکار'),
+      description: L(
+        'Inventory, tracking, and operations systems tailored to how your business works — barcode workflows, multi-user access, reporting, and desktop or web interfaces.',
+        'سیستم موجودی، رهگیری و عملیات متناسب با کسب‌وکار — بارکد، چندکاربره، گزارش و رابط وب/دسکتاپ.',
+      ),
+      problems: [
+        L(
+          '"We don\'t know where our products are after they leave the factory"',
+          '«نمی‌دانیم محصول بعد از کارخانه کجاست»',
+        ),
+        L(
+          '"Our warehouse team uses Excel and counts are always wrong"',
+          '«تیم انبار Excel دارد و موجودی همیشه غلط است»',
+        ),
+        L(
+          '"I need digital client sign-off for field missions"',
+          '«به تأیید دیجیتال مشتری برای مأموریت میدانی نیاز دارم»',
+        ),
+      ],
+      icon: Icons.inventory_2_outlined,
+      color: Color(0xFF8B5CF6),
+    ),
+    ServiceItem(
+      title: L('API Integration & Workflow Automation', 'یکپارچه‌سازی API و اتوماسیون'),
+      description: L(
+        'Connect your existing tools — CRMs, SMS, payment gateways, printers, scanners — into automated workflows that run without manual intervention.',
+        'اتصال ابزارهای موجود — CRM، SMS، درگاه پرداخت، پرینتر، اسکنر — به گردش کار خودکار.',
+      ),
+      problems: [
+        L(
+          '"When a form is submitted, I need SMS + email + database update automatically"',
+          '«با ثبت فرم، SMS + ایمیل + دیتابیس خودکار به‌روز شود»',
+        ),
+        L(
+          '"Our label printer needs to read from Excel but the process is manual"',
+          '«پرینتر لیبل باید از Excel بخواند اما فرآیند دستی است»',
+        ),
+        L(
+          '"I use 3 tools that don\'t talk to each other — I need them connected"',
+          '«۳ ابزار دارم که به هم وصل نیستند»',
+        ),
+      ],
+      icon: Icons.hub_outlined,
+      color: Color(0xFFF59E0B),
+    ),
   ];
 }

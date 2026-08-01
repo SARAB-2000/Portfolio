@@ -9,10 +9,16 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get appTitle => 'Portfolio';
+  String get appTitle => 'Ali Baziar';
 
   @override
   String get navHome => 'Home';
+
+  @override
+  String get navAbout => 'About';
+
+  @override
+  String get navServices => 'Services';
 
   @override
   String get navProjects => 'Projects';
@@ -39,28 +45,51 @@ class AppLocalizationsEn extends AppLocalizations {
   String get heroCtaProjects => 'View Projects';
 
   @override
-  String get heroCtaContact => 'Get in Touch';
+  String get heroCtaServices => 'See Services';
 
   @override
-  String get heroAvailable => 'Available for work';
+  String get heroCtaContact => 'Discuss Your Project';
 
   @override
-  String get sectionProjects => 'Selected Work';
+  String get heroAvailable => 'Available for freelance projects';
 
   @override
-  String get sectionProjectsSubtitle => 'Projects that showcase my craft';
+  String get sectionAbout => 'About Me';
 
   @override
-  String get sectionSkills => 'Skills & Tools';
+  String get sectionAboutSubtitle =>
+      'Business-focused Python developer for small teams and startups';
 
   @override
-  String get sectionSkillsSubtitle => 'Technologies I work with daily';
+  String get sectionServices => 'Services';
+
+  @override
+  String get sectionServicesSubtitle =>
+      'Fixed-scope packages for small businesses and startups';
+
+  @override
+  String get servicesCta => 'Discuss Your Project';
+
+  @override
+  String get sectionProjects => 'Business Projects';
+
+  @override
+  String get sectionProjectsSubtitle =>
+      'Real systems built for real business problems';
+
+  @override
+  String get sectionSkills => 'Technologies I Use';
+
+  @override
+  String get sectionSkillsSubtitle =>
+      'The stack behind the solutions — not the selling point';
 
   @override
   String get sectionExperience => 'Work Experience';
 
   @override
-  String get sectionExperienceSubtitle => 'My professional journey';
+  String get sectionExperienceSubtitle =>
+      'Production systems delivered for real companies';
 
   @override
   String get sectionEducation => 'Education';
@@ -78,16 +107,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sectionTestimonialsSubtitle => 'What people say about my work';
 
   @override
-  String get sectionContact => 'Let\'s Connect';
+  String get sectionContact => 'Start a Project';
 
   @override
-  String get sectionContactSubtitle => 'Reach out via email or social media';
+  String get sectionContactSubtitle =>
+      'Tell me about your workflow problem — I reply within 24 hours';
 
   @override
   String get contactEmail => 'Email';
 
   @override
   String get contactLocation => 'Location';
+
+  @override
+  String get contactResponseTime => 'Typical response time: within 24 hours';
 
   @override
   String get contactSendMessage => 'Send Message';
@@ -105,7 +138,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get footerRights => 'All rights reserved.';
 
   @override
-  String get viewProject => 'View Project';
+  String get footerTagline => 'Open to small projects & long-term work';
+
+  @override
+  String get viewProject => 'View Case Study';
 
   @override
   String get viewAllProjects => 'View All';
@@ -134,13 +170,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get caseOverview => 'Overview';
 
   @override
-  String get caseChallenge => 'The Challenge';
+  String get caseChallenge => 'The Problem';
 
   @override
-  String get caseSolution => 'The Solution';
+  String get caseSolution => 'What I Built';
 
   @override
-  String get caseResults => 'Results & Impact';
+  String get caseResults => 'Business Value & Results';
 
   @override
   String get projectDetails => 'Project Details';
@@ -178,4 +214,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String skillsCount(int count) {
     return '$count skills';
   }
+
+  @override
+  String get mobileContactFab => 'Contact';
 }

@@ -13,10 +13,12 @@ class HeroSection extends StatelessWidget {
   const HeroSection({
     super.key,
     required this.onViewProjects,
+    required this.onViewServices,
     required this.onContact,
   });
 
   final VoidCallback onViewProjects;
+  final VoidCallback onViewServices;
   final VoidCallback onContact;
 
   @override
@@ -41,7 +43,7 @@ class HeroSection extends StatelessWidget {
       children: [
         Expanded(flex: 3, child: _buildContent(context, l10n, profile)),
         const SizedBox(width: 48),
-        Expanded(flex: 2, child: _buildAvatar()),
+        Expanded(flex: 2, child: _buildAvatar(isWide: true)),
       ],
     );
   }
@@ -49,7 +51,7 @@ class HeroSection extends StatelessWidget {
   Widget _buildNarrow(BuildContext context, AppLocalizations l10n, PortfolioProfile profile) {
     return Column(
       children: [
-        _buildAvatar(),
+        _buildAvatar(isWide: false),
         const SizedBox(height: 40),
         _buildContent(context, l10n, profile),
       ],
@@ -62,11 +64,11 @@ class HeroSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // _AvailableBadge(label: l10n.heroAvailable)
-        //     .animate()
-        //     .fadeIn(delay: 200.ms)
-        //     .slideX(begin: -0.2, end: 0),
-        // const SizedBox(height: 24),
+        _AvailableBadge(label: l10n.heroAvailable)
+            .animate()
+            .fadeIn(delay: 200.ms)
+            .slideX(begin: -0.2, end: 0),
+        const SizedBox(height: 24),
         Text(
           l10n.heroGreeting,
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
@@ -107,14 +109,19 @@ class HeroSection extends StatelessWidget {
           runSpacing: 12,
           children: [
             ElevatedButton.icon(
-              onPressed: onViewProjects,
-              icon: const Icon(Icons.arrow_forward, size: 18),
-              label: Text(l10n.heroCtaProjects),
-            ).animate().fadeIn(delay: 700.ms).scale(begin: const Offset(0.9, 0.9)),
-            OutlinedButton.icon(
               onPressed: onContact,
               icon: const Icon(Icons.mail_outline, size: 18),
               label: Text(l10n.heroCtaContact),
+            ).animate().fadeIn(delay: 700.ms).scale(begin: const Offset(0.9, 0.9)),
+            OutlinedButton.icon(
+              onPressed: onViewServices,
+              icon: const Icon(Icons.handyman_outlined, size: 18),
+              label: Text(l10n.heroCtaServices),
+            ).animate().fadeIn(delay: 750.ms).scale(begin: const Offset(0.9, 0.9)),
+            OutlinedButton.icon(
+              onPressed: onViewProjects,
+              icon: const Icon(Icons.arrow_forward, size: 18),
+              label: Text(l10n.heroCtaProjects),
             ).animate().fadeIn(delay: 800.ms).scale(begin: const Offset(0.9, 0.9)),
           ],
         ),
@@ -124,15 +131,17 @@ class HeroSection extends StatelessWidget {
     );
   }
 
-  Widget _buildAvatar() {
+  Widget _buildAvatar({required bool isWide}) {
+    final size = isWide ? 280.0 : 200.0;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Center(
           child: RepaintBoundary(
             child: AnimatedGlow(
-              size: 280,
-              child: const ProfileAvatar(size: 280),
+              size: size,
+              child: ProfileAvatar(size: size),
             ),
           ),
         ).animate().fadeIn(delay: 300.ms).scale(
@@ -159,8 +168,8 @@ class _HeroStatsPanel extends StatelessWidget {
     final stats = PortfolioData.heroStats;
 
     return Container(
-      width: 300,
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 18),
+      width: 380,
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 18),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         gradient: LinearGradient(
@@ -256,22 +265,23 @@ class _HeroStatTile extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 6),
-              child: Text(
-                '+',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w800,
-                  color: AppTheme.accentSecondary,
-                  height: 1,
+            if (stat.showPlus)
+              Padding(
+                padding: const EdgeInsets.only(top: 6),
+                child: Text(
+                  '+',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w800,
+                    color: AppTheme.accentSecondary,
+                    height: 1,
+                  ),
                 ),
               ),
-            ),
             GradientText(
               '${stat.value}',
-              style: const TextStyle(
-                fontSize: 36,
+              style: TextStyle(
+                fontSize: stat.showPlus ? 36 : 32,
                 fontWeight: FontWeight.w900,
                 height: 1,
                 letterSpacing: -1,
@@ -295,45 +305,45 @@ class _HeroStatTile extends StatelessWidget {
   }
 }
 
-// class _AvailableBadge extends StatelessWidget {
-//   const _AvailableBadge({required this.label});
-//
-//   final String label;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-//       decoration: BoxDecoration(
-//         color: const Color(0xFF10B981).withValues(alpha: 0.12),
-//         borderRadius: BorderRadius.circular(100),
-//         border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.3)),
-//       ),
-//       child: Row(
-//         mainAxisSize: MainAxisSize.min,
-//         children: [
-//           Container(
-//             width: 8,
-//             height: 8,
-//             decoration: const BoxDecoration(
-//               color: Color(0xFF10B981),
-//               shape: BoxShape.circle,
-//             ),
-//           ).animate(onPlay: (c) => c.repeat()).fadeIn(duration: 800.ms).then().fadeOut(duration: 800.ms),
-//           const SizedBox(width: 8),
-//           Text(
-//             label,
-//             style: const TextStyle(
-//               color: Color(0xFF10B981),
-//               fontWeight: FontWeight.w600,
-//               fontSize: 13,
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+class _AvailableBadge extends StatelessWidget {
+  const _AvailableBadge({required this.label});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+      decoration: BoxDecoration(
+        color: const Color(0xFF10B981).withValues(alpha: 0.12),
+        borderRadius: BorderRadius.circular(100),
+        border: Border.all(color: const Color(0xFF10B981).withValues(alpha: 0.3)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            width: 8,
+            height: 8,
+            decoration: const BoxDecoration(
+              color: Color(0xFF10B981),
+              shape: BoxShape.circle,
+            ),
+          ).animate(onPlay: (c) => c.repeat()).fadeIn(duration: 800.ms).then().fadeOut(duration: 800.ms),
+          const SizedBox(width: 8),
+          Text(
+            label,
+            style: const TextStyle(
+              color: Color(0xFF10B981),
+              fontWeight: FontWeight.w600,
+              fontSize: 13,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 class TechMarquee extends StatefulWidget {
   const TechMarquee({super.key});

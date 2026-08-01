@@ -9,10 +9,16 @@ class AppLocalizationsFa extends AppLocalizations {
   AppLocalizationsFa([String locale = 'fa']) : super(locale);
 
   @override
-  String get appTitle => 'پورتفولیو';
+  String get appTitle => 'علی بازيار';
 
   @override
   String get navHome => 'خانه';
+
+  @override
+  String get navAbout => 'درباره من';
+
+  @override
+  String get navServices => 'خدمات';
 
   @override
   String get navProjects => 'پروژه‌ها';
@@ -39,30 +45,50 @@ class AppLocalizationsFa extends AppLocalizations {
   String get heroCtaProjects => 'مشاهده پروژه‌ها';
 
   @override
-  String get heroCtaContact => 'ارتباط با من';
+  String get heroCtaServices => 'مشاهده خدمات';
 
   @override
-  String get heroAvailable => 'آماده همکاری';
+  String get heroCtaContact => 'شروع گفتگو';
 
   @override
-  String get sectionProjects => 'کارهای منتخب';
+  String get heroAvailable => 'آماده پروژه فریلنس';
+
+  @override
+  String get sectionAbout => 'درباره من';
+
+  @override
+  String get sectionAboutSubtitle =>
+      'توسعه‌دهنده Python متمرکز بر کسب‌وکار برای تیم‌های کوچک و استارتاپ';
+
+  @override
+  String get sectionServices => 'خدمات';
+
+  @override
+  String get sectionServicesSubtitle =>
+      'بسته‌های fixed-scope برای کسب‌وکارهای کوچک و استارتاپ';
+
+  @override
+  String get servicesCta => 'شروع گفتگو';
+
+  @override
+  String get sectionProjects => 'پروژه‌های کسب‌وکار';
 
   @override
   String get sectionProjectsSubtitle =>
-      'پروژه‌هایی که مهارت من را نشان می‌دهند';
+      'سیستم‌های واقعی برای مشکلات واقعی کسب‌وکار';
 
   @override
-  String get sectionSkills => 'مهارت‌ها و ابزارها';
+  String get sectionSkills => 'تکنولوژی‌هایی که استفاده می‌کنم';
 
   @override
-  String get sectionSkillsSubtitle =>
-      'تکنولوژی‌هایی که هر روز با آن‌ها کار می‌کنم';
+  String get sectionSkillsSubtitle => 'ابزار پشت راه‌حل — نه نقطه فروش';
 
   @override
   String get sectionExperience => 'سوابق کاری';
 
   @override
-  String get sectionExperienceSubtitle => 'مسیر حرفه‌ای من';
+  String get sectionExperienceSubtitle =>
+      'سیستم‌های عملیاتی تحویل‌شده برای شرکت‌های واقعی';
 
   @override
   String get sectionEducation => 'تحصیلات';
@@ -81,17 +107,20 @@ class AppLocalizationsFa extends AppLocalizations {
       'آنچه دیگران درباره کار من می‌گویند';
 
   @override
-  String get sectionContact => 'بیایید در ارتباط باشیم';
+  String get sectionContact => 'شروع پروژه';
 
   @override
   String get sectionContactSubtitle =>
-      'از طریق ایمیل یا شبکه‌های اجتماعی در ارتباط باشید';
+      'مشکل گردش کار خود را بگویید — ظرف ۲۴ ساعت پاسخ می‌دهم';
 
   @override
   String get contactEmail => 'ایمیل';
 
   @override
   String get contactLocation => 'موقعیت';
+
+  @override
+  String get contactResponseTime => 'زمان پاسخ معمول: ظرف ۲۴ ساعت';
 
   @override
   String get contactSendMessage => 'ارسال پیام';
@@ -109,7 +138,10 @@ class AppLocalizationsFa extends AppLocalizations {
   String get footerRights => 'تمامی حقوق محفوظ است.';
 
   @override
-  String get viewProject => 'مشاهده پروژه';
+  String get footerTagline => 'پذیرش پروژه‌های کوچک و همکاری بلندمدت';
+
+  @override
+  String get viewProject => 'مشاهده case study';
 
   @override
   String get viewAllProjects => 'مشاهده همه';
@@ -138,13 +170,13 @@ class AppLocalizationsFa extends AppLocalizations {
   String get caseOverview => 'نمای کلی';
 
   @override
-  String get caseChallenge => 'چالش';
+  String get caseChallenge => 'مشکل';
 
   @override
-  String get caseSolution => 'راه‌حل';
+  String get caseSolution => 'آنچه ساختم';
 
   @override
-  String get caseResults => 'نتایج و تأثیر';
+  String get caseResults => 'ارزش و نتیجه کسب‌وکار';
 
   @override
   String get projectDetails => 'جزئیات پروژه';
@@ -182,4 +214,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String skillsCount(int count) {
     return '$count مهارت';
   }
+
+  @override
+  String get mobileContactFab => 'تماس';
 }
