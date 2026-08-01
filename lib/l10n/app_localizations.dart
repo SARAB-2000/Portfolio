@@ -116,6 +116,12 @@ abstract class AppLocalizations {
   /// **'About'**
   String get navAbout;
 
+  /// No description provided for @navProblems.
+  ///
+  /// In en, this message translates to:
+  /// **'Problems I Solve'**
+  String get navProblems;
+
   /// No description provided for @navServices.
   ///
   /// In en, this message translates to:
@@ -161,32 +167,50 @@ abstract class AppLocalizations {
   /// No description provided for @heroGreeting.
   ///
   /// In en, this message translates to:
-  /// **'Hello, I\'m'**
+  /// **'I\'m'**
   String get heroGreeting;
 
   /// No description provided for @heroCtaProjects.
   ///
   /// In en, this message translates to:
-  /// **'View Projects'**
+  /// **'See My Work'**
   String get heroCtaProjects;
 
   /// No description provided for @heroCtaServices.
   ///
   /// In en, this message translates to:
-  /// **'See Services'**
+  /// **'View Services'**
   String get heroCtaServices;
 
   /// No description provided for @heroCtaContact.
   ///
   /// In en, this message translates to:
-  /// **'Discuss Your Project'**
+  /// **'Describe Your Problem'**
   String get heroCtaContact;
 
   /// No description provided for @heroAvailable.
   ///
   /// In en, this message translates to:
-  /// **'Available for freelance projects'**
+  /// **'Available for new projects'**
   String get heroAvailable;
+
+  /// No description provided for @sectionProblems.
+  ///
+  /// In en, this message translates to:
+  /// **'Sound Familiar?'**
+  String get sectionProblems;
+
+  /// No description provided for @sectionProblemsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'If any of these problems cost you time or money, I can help'**
+  String get sectionProblemsSubtitle;
+
+  /// No description provided for @problemsCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Tell me about your situation'**
+  String get problemsCta;
 
   /// No description provided for @sectionAbout.
   ///
@@ -197,49 +221,49 @@ abstract class AppLocalizations {
   /// No description provided for @sectionAboutSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Business-focused Python developer for small teams and startups'**
+  /// **'Reliable delivery for small teams — not another developer who vanishes'**
   String get sectionAboutSubtitle;
 
   /// No description provided for @sectionServices.
   ///
   /// In en, this message translates to:
-  /// **'Services'**
+  /// **'How I Can Help'**
   String get sectionServices;
 
   /// No description provided for @sectionServicesSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Fixed-scope packages for small businesses and startups'**
+  /// **'Pick a starting point — or describe your problem and I\'ll recommend the smallest fix'**
   String get sectionServicesSubtitle;
 
   /// No description provided for @servicesCta.
   ///
   /// In en, this message translates to:
-  /// **'Discuss Your Project'**
+  /// **'Get a Free Scope Estimate'**
   String get servicesCta;
 
   /// No description provided for @sectionProjects.
   ///
   /// In en, this message translates to:
-  /// **'Business Projects'**
+  /// **'Proof: Real Projects'**
   String get sectionProjects;
 
   /// No description provided for @sectionProjectsSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Real systems built for real business problems'**
+  /// **'Business problems I solved for real companies — not tutorial apps'**
   String get sectionProjectsSubtitle;
 
   /// No description provided for @sectionSkills.
   ///
   /// In en, this message translates to:
-  /// **'Technologies I Use'**
+  /// **'Tools I Use'**
   String get sectionSkills;
 
   /// No description provided for @sectionSkillsSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'The stack behind the solutions — not the selling point'**
+  /// **'For your reference — clients hire me for outcomes, not buzzwords'**
   String get sectionSkillsSubtitle;
 
   /// No description provided for @sectionExperience.
@@ -251,7 +275,7 @@ abstract class AppLocalizations {
   /// No description provided for @sectionExperienceSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Production systems delivered for real companies'**
+  /// **'Production systems delivered and still running'**
   String get sectionExperienceSubtitle;
 
   /// No description provided for @sectionEducation.
@@ -263,7 +287,7 @@ abstract class AppLocalizations {
   /// No description provided for @sectionEducationSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'My academic background'**
+  /// **'Academic background'**
   String get sectionEducationSubtitle;
 
   /// No description provided for @educationThesisProject.
@@ -287,14 +311,26 @@ abstract class AppLocalizations {
   /// No description provided for @sectionContact.
   ///
   /// In en, this message translates to:
-  /// **'Start a Project'**
+  /// **'Let\'s Fix Your Workflow'**
   String get sectionContact;
 
   /// No description provided for @sectionContactSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Tell me about your workflow problem — I reply within 24 hours'**
+  /// **'Describe what\'s slow, manual, or broken — I\'ll reply within 24 hours with next steps'**
   String get sectionContactSubtitle;
+
+  /// No description provided for @contactPrimaryCta.
+  ///
+  /// In en, this message translates to:
+  /// **'Email Me Your Problem'**
+  String get contactPrimaryCta;
+
+  /// No description provided for @contactCtaHint.
+  ///
+  /// In en, this message translates to:
+  /// **'No commitment. Just tell me what\'s not working and I\'ll suggest if I can help.'**
+  String get contactCtaHint;
 
   /// No description provided for @contactEmail.
   ///
@@ -311,7 +347,7 @@ abstract class AppLocalizations {
   /// No description provided for @contactResponseTime.
   ///
   /// In en, this message translates to:
-  /// **'Typical response time: within 24 hours'**
+  /// **'Typical reply: within 24 hours · English communication'**
   String get contactResponseTime;
 
   /// No description provided for @contactSendMessage.
@@ -347,13 +383,13 @@ abstract class AppLocalizations {
   /// No description provided for @footerTagline.
   ///
   /// In en, this message translates to:
-  /// **'Open to small projects & long-term work'**
+  /// **'Open to small projects from \$50 · Remote worldwide'**
   String get footerTagline;
 
   /// No description provided for @viewProject.
   ///
   /// In en, this message translates to:
-  /// **'View Case Study'**
+  /// **'See How I Solved It'**
   String get viewProject;
 
   /// No description provided for @viewAllProjects.
@@ -491,7 +527,7 @@ abstract class AppLocalizations {
   /// No description provided for @mobileContactFab.
   ///
   /// In en, this message translates to:
-  /// **'Contact'**
+  /// **'Email Me'**
   String get mobileContactFab;
 }
 

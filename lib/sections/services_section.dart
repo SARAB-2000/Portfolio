@@ -44,15 +44,17 @@ class ServicesSection extends StatelessWidget {
             title: l10n.sectionServices,
             subtitle: l10n.sectionServicesSubtitle,
           ).animate().fadeIn().slideY(begin: 0.2, end: 0),
-          const SizedBox(height: 12),
-          Text(
-            PortfolioData.pricingNote.of(context),
-            style: TextStyle(
-              color: AppTheme.accent,
-              fontWeight: FontWeight.w600,
-              fontSize: 14,
-            ),
-          ).animate().fadeIn(delay: 80.ms),
+          if (Localizations.localeOf(context).languageCode != 'fa') ...[
+            const SizedBox(height: 12),
+            Text(
+              PortfolioData.pricingNote.of(context),
+              style: TextStyle(
+                color: AppTheme.accent,
+                fontWeight: FontWeight.w600,
+                fontSize: 14,
+              ),
+            ).animate().fadeIn(delay: 80.ms),
+          ],
           const SizedBox(height: 28),
           LayoutBuilder(
             builder: (context, constraints) {

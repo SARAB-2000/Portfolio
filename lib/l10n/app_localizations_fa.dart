@@ -18,6 +18,9 @@ class AppLocalizationsFa extends AppLocalizations {
   String get navAbout => 'درباره من';
 
   @override
+  String get navProblems => 'مشکلاتی که حل می‌کنم';
+
+  @override
   String get navServices => 'خدمات';
 
   @override
@@ -27,7 +30,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get navSkills => 'مهارت‌ها';
 
   @override
-  String get navExperience => 'تجربه';
+  String get navExperience => 'سوابق کاری';
 
   @override
   String get navEducation => 'تحصیلات';
@@ -39,62 +42,73 @@ class AppLocalizationsFa extends AppLocalizations {
   String get navContact => 'تماس';
 
   @override
-  String get heroGreeting => 'سلام، من';
+  String get heroGreeting => 'من';
 
   @override
-  String get heroCtaProjects => 'مشاهده پروژه‌ها';
+  String get heroCtaProjects => 'نمونه کارها';
 
   @override
-  String get heroCtaServices => 'مشاهده خدمات';
+  String get heroCtaServices => 'خدمات';
 
   @override
-  String get heroCtaContact => 'شروع گفتگو';
+  String get heroCtaContact => 'مشکل خود را بگویید';
 
   @override
-  String get heroAvailable => 'آماده پروژه فریلنس';
+  String get heroAvailable => 'آماده پذیرش پروژه جدید';
+
+  @override
+  String get sectionProblems => 'این مشکلات برایتان آشناست؟';
+
+  @override
+  String get sectionProblemsSubtitle =>
+      'اگر هر کدام وقت یا هزینه‌تان را می‌گیرد، می‌توانم کمک کنم';
+
+  @override
+  String get problemsCta => 'مشکل خود را برایم بنویسید';
 
   @override
   String get sectionAbout => 'درباره من';
 
   @override
   String get sectionAboutSubtitle =>
-      'توسعه‌دهنده پایتون با نگاه کسب‌وکارمحور، برای تیم‌های کوچک و استارتاپ‌ها';
+      'همکاری قابل اعتماد برای تیم‌های کوچک — نه برنامه‌نویسی که وسط کار رها کند';
 
   @override
-  String get sectionServices => 'خدمات';
+  String get sectionServices => 'چطور می‌توانم کمک کنم';
 
   @override
   String get sectionServicesSubtitle =>
-      'بسته‌های مشخص و قابل‌برآورد برای کسب‌وکارهای کوچک و استارتاپ‌ها';
+      'یک خدمت انتخاب کنید، یا مشکل را بگویید تا کوچک‌ترین راه‌حل مؤثر را پیشنهاد دهم';
 
   @override
-  String get servicesCta => 'شروع گفتگو';
+  String get servicesCta => 'برآورد رایگان محدوده کار';
 
   @override
-  String get sectionProjects => 'پروژه‌های کسب‌وکار';
+  String get sectionProjects => 'نمونه کارهای واقعی';
 
   @override
   String get sectionProjectsSubtitle =>
-      'سیستم‌های واقعی برای مشکلات واقعی کسب‌وکار';
+      'مشکلات واقعی کسب‌وکار که برایشان راه‌حل ساخته‌ام';
 
   @override
-  String get sectionSkills => 'تکنولوژی‌هایی که استفاده می‌کنم';
+  String get sectionSkills => 'ابزارهایی که استفاده می‌کنم';
 
   @override
-  String get sectionSkillsSubtitle => 'ابزار پشت راه‌حل — نه نقطه فروش';
+  String get sectionSkillsSubtitle =>
+      'فقط برای اطلاع — مشتری برای نتیجه می‌آید، نه برای اسم تکنولوژی';
 
   @override
   String get sectionExperience => 'سوابق کاری';
 
   @override
   String get sectionExperienceSubtitle =>
-      'سیستم‌های عملیاتی تحویل‌شده برای شرکت‌های واقعی';
+      'سامانه‌های عملیاتی که تحویل داده‌ام و هنوز در حال استفاده هستند';
 
   @override
   String get sectionEducation => 'تحصیلات';
 
   @override
-  String get sectionEducationSubtitle => 'سوابق تحصیلی من';
+  String get sectionEducationSubtitle => 'سوابق تحصیلی';
 
   @override
   String get educationThesisProject => 'پروژه پایان‌نامه';
@@ -107,11 +121,18 @@ class AppLocalizationsFa extends AppLocalizations {
       'آنچه دیگران درباره کار من می‌گویند';
 
   @override
-  String get sectionContact => 'شروع پروژه';
+  String get sectionContact => 'بیایید فرآیند کاری‌تان را بهتر کنیم';
 
   @override
   String get sectionContactSubtitle =>
-      'مشکل گردش کار خود را بگویید — ظرف ۲۴ ساعت پاسخ می‌دهم';
+      'بگویید چه بخشی کند، دستی یا خراب است — ظرف ۲۴ ساعت مرحله بعد را توضیح می‌دهم';
+
+  @override
+  String get contactPrimaryCta => 'مشکل را ایمیل کنید';
+
+  @override
+  String get contactCtaHint =>
+      'بدون هیچ تعهدی. فقط بگویید چه چیزی درست کار نمی‌کند تا بگویم آیا می‌توانم کمک کنم.';
 
   @override
   String get contactEmail => 'ایمیل';
@@ -120,7 +141,8 @@ class AppLocalizationsFa extends AppLocalizations {
   String get contactLocation => 'موقعیت';
 
   @override
-  String get contactResponseTime => 'زمان پاسخ معمول: ظرف ۲۴ ساعت';
+  String get contactResponseTime =>
+      'معمولاً ظرف ۲۴ ساعت پاسخ می‌دهم · ارتباط به زبان انگلیسی';
 
   @override
   String get contactSendMessage => 'ارسال پیام';
@@ -138,10 +160,10 @@ class AppLocalizationsFa extends AppLocalizations {
   String get footerRights => 'تمامی حقوق محفوظ است.';
 
   @override
-  String get footerTagline => 'پذیرش پروژه‌های کوچک و همکاری بلندمدت';
+  String get footerTagline => 'دورکاری بین‌المللی';
 
   @override
-  String get viewProject => 'مشاهده case study';
+  String get viewProject => 'ببینید چطور حل شد';
 
   @override
   String get viewAllProjects => 'مشاهده همه';
@@ -173,10 +195,10 @@ class AppLocalizationsFa extends AppLocalizations {
   String get caseChallenge => 'مشکل';
 
   @override
-  String get caseSolution => 'آنچه ساختم';
+  String get caseSolution => 'راه‌حل';
 
   @override
-  String get caseResults => 'ارزش و نتیجه کسب‌وکار';
+  String get caseResults => 'نتیجه برای کسب‌وکار';
 
   @override
   String get projectDetails => 'جزئیات پروژه';
@@ -188,7 +210,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get detailDuration => 'مدت';
 
   @override
-  String get detailCategory => 'دسته';
+  String get detailCategory => 'دسته‌بندی';
 
   @override
   String get visitLiveSite => 'مشاهده سایت';
@@ -203,11 +225,12 @@ class AppLocalizationsFa extends AppLocalizations {
   String get nextProject => 'بعدی';
 
   @override
-  String get skillsExploreHint => 'همه دسته‌ها را ببین — روی تب‌ها بزن';
+  String get skillsExploreHint =>
+      'همه دسته‌ها را ببینید — روی زبانه‌ها کلیک کنید';
 
   @override
   String skillsAlsoSee(String category) {
-    return 'ببین: $category';
+    return 'همچنین: $category';
   }
 
   @override
@@ -216,5 +239,5 @@ class AppLocalizationsFa extends AppLocalizations {
   }
 
   @override
-  String get mobileContactFab => 'تماس';
+  String get mobileContactFab => 'ایمیل';
 }

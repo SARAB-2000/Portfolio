@@ -29,6 +29,7 @@ class ContactSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final profile = PortfolioData.profile;
+    final colors = context.colors;
     final isWide = MediaQuery.sizeOf(context).width > 900;
 
     return Container(
@@ -53,6 +54,33 @@ class ContactSection extends StatelessWidget {
               fontSize: 14,
             ),
           ).animate().fadeIn(delay: 80.ms),
+          const SizedBox(height: 24),
+          Center(
+            child: ElevatedButton.icon(
+              onPressed: () => _launchEmail(profile.email),
+              icon: const Icon(Icons.mail_outline, size: 20),
+              label: Text(l10n.contactPrimaryCta),
+              style: ElevatedButton.styleFrom(
+                padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 16),
+                textStyle: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ).animate().fadeIn(delay: 120.ms).slideY(begin: 0.1, end: 0),
+          ),
+          const SizedBox(height: 12),
+          Center(
+            child: Text(
+              l10n.contactCtaHint,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: colors.textSecondary,
+                fontSize: 14,
+                height: 1.5,
+              ),
+            ),
+          ).animate().fadeIn(delay: 160.ms),
           const SizedBox(height: 36),
           Center(
             child: Wrap(
@@ -160,12 +188,13 @@ class _ContactChannelCardState extends State<_ContactChannelCard> {
                 : null,
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Icon(widget.icon, color: widget.iconColor, size: 28),
               const SizedBox(height: 14),
               Text(
                 widget.label,
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   color: colors.textSecondary,
                   fontSize: 13,
@@ -174,10 +203,10 @@ class _ContactChannelCardState extends State<_ContactChannelCard> {
               ),
               const SizedBox(height: 6),
               Expanded(
-                child: Align(
-                  alignment: Alignment.topLeft,
+                child: Center(
                   child: Text(
                     widget.value,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 15,
@@ -189,6 +218,8 @@ class _ContactChannelCardState extends State<_ContactChannelCard> {
               ),
               if (isInteractive)
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
                       AppLocalizations.of(context)!.visitLiveSite,

@@ -7,7 +7,6 @@ import '../theme/app_colors.dart';
 import '../theme/app_theme.dart';
 import '../widgets/common_widgets.dart';
 import '../widgets/profile_avatar.dart';
-import '../widgets/skill_icon_widget.dart';
 
 class HeroSection extends StatelessWidget {
   const HeroSection({
@@ -68,24 +67,16 @@ class HeroSection extends StatelessWidget {
             .animate()
             .fadeIn(delay: 200.ms)
             .slideX(begin: -0.2, end: 0),
-        const SizedBox(height: 24),
-        Text(
-          l10n.heroGreeting,
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                color: colors.textSecondary,
-                fontWeight: FontWeight.w400,
-              ),
-        ).animate().fadeIn(delay: 300.ms).slideY(begin: 0.3, end: 0),
-        const SizedBox(height: 8),
+        const SizedBox(height: 20),
         GradientText(
-          profile.name,
+          profile.headline.of(context),
           style: Theme.of(context).textTheme.displayLarge?.copyWith(
                 fontWeight: FontWeight.w900,
-                fontSize: 56,
-                height: 1.05,
-                letterSpacing: -1.5,
+                fontSize: 48,
+                height: 1.1,
+                letterSpacing: -1.2,
               ),
-        ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.3, end: 0),
+        ).animate().fadeIn(delay: 300.ms).slideY(begin: 0.3, end: 0),
         const SizedBox(height: 16),
         Text(
           profile.role.of(context),
@@ -93,8 +84,16 @@ class HeroSection extends StatelessWidget {
                 color: AppTheme.accent,
                 fontWeight: FontWeight.w600,
               ),
-        ).animate().fadeIn(delay: 500.ms).slideY(begin: 0.3, end: 0),
-        const SizedBox(height: 20),
+        ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.3, end: 0),
+        const SizedBox(height: 8),
+        Text(
+          '${l10n.heroGreeting} ${profile.name}',
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: colors.textSecondary,
+                fontWeight: FontWeight.w500,
+              ),
+        ).animate().fadeIn(delay: 450.ms).slideY(begin: 0.3, end: 0),
+        const SizedBox(height: 16),
         Text(
           profile.tagline.of(context),
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -102,8 +101,19 @@ class HeroSection extends StatelessWidget {
                 height: 1.7,
                 fontSize: 17,
               ),
-        ).animate().fadeIn(delay: 600.ms).slideY(begin: 0.3, end: 0),
-        const SizedBox(height: 36),
+        ).animate().fadeIn(delay: 500.ms).slideY(begin: 0.3, end: 0),
+        const SizedBox(height: 28),
+        Wrap(
+          spacing: 10,
+          runSpacing: 10,
+          children: [
+            for (var i = 0; i < PortfolioData.heroTrustPoints.length; i++)
+              _TrustChip(text: PortfolioData.heroTrustPoints[i].of(context))
+                  .animate()
+                  .fadeIn(delay: (550 + i * 60).ms),
+          ],
+        ),
+        const SizedBox(height: 28),
         Wrap(
           spacing: 16,
           runSpacing: 12,
@@ -125,8 +135,6 @@ class HeroSection extends StatelessWidget {
             ).animate().fadeIn(delay: 800.ms).scale(begin: const Offset(0.9, 0.9)),
           ],
         ),
-        const SizedBox(height: 32),
-        const TechMarquee(),
       ],
     );
   }
@@ -305,6 +313,41 @@ class _HeroStatTile extends StatelessWidget {
   }
 }
 
+class _TrustChip extends StatelessWidget {
+  const _TrustChip({required this.text});
+
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.colors;
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: AppTheme.accent.withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(100),
+        border: Border.all(color: AppTheme.accent.withValues(alpha: 0.2)),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.check, size: 14, color: AppTheme.accent),
+          const SizedBox(width: 6),
+          Text(
+            text,
+            style: TextStyle(
+              color: colors.textPrimary,
+              fontWeight: FontWeight.w500,
+              fontSize: 12,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _AvailableBadge extends StatelessWidget {
   const _AvailableBadge({required this.label});
 
@@ -336,115 +379,6 @@ class _AvailableBadge extends StatelessWidget {
             style: const TextStyle(
               color: Color(0xFF10B981),
               fontWeight: FontWeight.w600,
-              fontSize: 13,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class TechMarquee extends StatefulWidget {
-  const TechMarquee({super.key});
-
-  @override
-  State<TechMarquee> createState() => _TechMarqueeState();
-}
-
-class _TechMarqueeState extends State<TechMarquee> with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 45),
-    )..repeat();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final labels = PortfolioData.techMarquee;
-    const chipWidth = 118.0;
-    final loopWidth = labels.length * chipWidth;
-
-    return RepaintBoundary(
-      child: SizedBox(
-        height: 44,
-        width: double.infinity,
-        child: ClipRect(
-          child: UnconstrainedBox(
-            alignment: Alignment.centerLeft,
-            constrainedAxis: Axis.vertical,
-            clipBehavior: Clip.hardEdge,
-            child: AnimatedBuilder(
-              animation: _controller,
-              builder: (context, child) {
-                return Transform.translate(
-                  offset: Offset(-_controller.value * loopWidth, 0),
-                  child: child,
-                );
-              },
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  for (final label in [...labels, ...labels])
-                    Padding(
-                      padding: const EdgeInsets.only(right: 12),
-                      child: _MarqueeChip(label: label),
-                    ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _MarqueeChip extends StatelessWidget {
-  const _MarqueeChip({required this.label});
-
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = context.colors;
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-      decoration: BoxDecoration(
-        color: colors.surfaceLight,
-        borderRadius: BorderRadius.circular(100),
-        border: Border.all(color: colors.border),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(3),
-            decoration: BoxDecoration(
-              color: colors.surface,
-              borderRadius: BorderRadius.circular(6),
-              border: Border.all(color: colors.border.withValues(alpha: 0.5)),
-            ),
-            child: SkillIconWidget(skillName: label, size: 16),
-          ),
-          const SizedBox(width: 8),
-          Text(
-            label,
-            style: TextStyle(
-              color: colors.textSecondary,
-              fontWeight: FontWeight.w500,
               fontSize: 13,
             ),
           ),

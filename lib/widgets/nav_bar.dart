@@ -72,7 +72,7 @@ class PortfolioNavBar extends StatelessWidget {
             const SizedBox(width: 28),
             Row(
               children: [
-                _NavLink(l10n.navAbout, () => onNavTap('about')),
+                _NavLink(l10n.navProblems, () => onNavTap('problems')),
                 _NavLink(l10n.navServices, () => onNavTap('services')),
                 _NavLink(l10n.navProjects, () => onNavTap('projects')),
                 _NavLink(l10n.navExperience, () => onNavTap('experience')),

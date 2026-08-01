@@ -18,6 +18,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navAbout => 'About';
 
   @override
+  String get navProblems => 'Problems I Solve';
+
+  @override
   String get navServices => 'Services';
 
   @override
@@ -39,63 +42,73 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navContact => 'Contact';
 
   @override
-  String get heroGreeting => 'Hello, I\'m';
+  String get heroGreeting => 'I\'m';
 
   @override
-  String get heroCtaProjects => 'View Projects';
+  String get heroCtaProjects => 'See My Work';
 
   @override
-  String get heroCtaServices => 'See Services';
+  String get heroCtaServices => 'View Services';
 
   @override
-  String get heroCtaContact => 'Discuss Your Project';
+  String get heroCtaContact => 'Describe Your Problem';
 
   @override
-  String get heroAvailable => 'Available for freelance projects';
+  String get heroAvailable => 'Available for new projects';
+
+  @override
+  String get sectionProblems => 'Sound Familiar?';
+
+  @override
+  String get sectionProblemsSubtitle =>
+      'If any of these problems cost you time or money, I can help';
+
+  @override
+  String get problemsCta => 'Tell me about your situation';
 
   @override
   String get sectionAbout => 'About Me';
 
   @override
   String get sectionAboutSubtitle =>
-      'Business-focused Python developer for small teams and startups';
+      'Reliable delivery for small teams — not another developer who vanishes';
 
   @override
-  String get sectionServices => 'Services';
+  String get sectionServices => 'How I Can Help';
 
   @override
   String get sectionServicesSubtitle =>
-      'Fixed-scope packages for small businesses and startups';
+      'Pick a starting point — or describe your problem and I\'ll recommend the smallest fix';
 
   @override
-  String get servicesCta => 'Discuss Your Project';
+  String get servicesCta => 'Get a Free Scope Estimate';
 
   @override
-  String get sectionProjects => 'Business Projects';
+  String get sectionProjects => 'Proof: Real Projects';
 
   @override
   String get sectionProjectsSubtitle =>
-      'Real systems built for real business problems';
+      'Business problems I solved for real companies — not tutorial apps';
 
   @override
-  String get sectionSkills => 'Technologies I Use';
+  String get sectionSkills => 'Tools I Use';
 
   @override
   String get sectionSkillsSubtitle =>
-      'The stack behind the solutions — not the selling point';
+      'For your reference — clients hire me for outcomes, not buzzwords';
 
   @override
   String get sectionExperience => 'Work Experience';
 
   @override
   String get sectionExperienceSubtitle =>
-      'Production systems delivered for real companies';
+      'Production systems delivered and still running';
 
   @override
   String get sectionEducation => 'Education';
 
   @override
-  String get sectionEducationSubtitle => 'My academic background';
+  String get sectionEducationSubtitle => 'Academic background';
 
   @override
   String get educationThesisProject => 'Thesis project';
@@ -107,11 +120,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sectionTestimonialsSubtitle => 'What people say about my work';
 
   @override
-  String get sectionContact => 'Start a Project';
+  String get sectionContact => 'Let\'s Fix Your Workflow';
 
   @override
   String get sectionContactSubtitle =>
-      'Tell me about your workflow problem — I reply within 24 hours';
+      'Describe what\'s slow, manual, or broken — I\'ll reply within 24 hours with next steps';
+
+  @override
+  String get contactPrimaryCta => 'Email Me Your Problem';
+
+  @override
+  String get contactCtaHint =>
+      'No commitment. Just tell me what\'s not working and I\'ll suggest if I can help.';
 
   @override
   String get contactEmail => 'Email';
@@ -120,7 +140,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get contactLocation => 'Location';
 
   @override
-  String get contactResponseTime => 'Typical response time: within 24 hours';
+  String get contactResponseTime =>
+      'Typical reply: within 24 hours · English communication';
 
   @override
   String get contactSendMessage => 'Send Message';
@@ -138,10 +159,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get footerRights => 'All rights reserved.';
 
   @override
-  String get footerTagline => 'Open to small projects & long-term work';
+  String get footerTagline =>
+      'Open to small projects from \$50 · Remote worldwide';
 
   @override
-  String get viewProject => 'View Case Study';
+  String get viewProject => 'See How I Solved It';
 
   @override
   String get viewAllProjects => 'View All';
@@ -216,5 +238,5 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get mobileContactFab => 'Contact';
+  String get mobileContactFab => 'Email Me';
 }

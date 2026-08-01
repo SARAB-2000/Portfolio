@@ -7,7 +7,7 @@ Copy-paste ready content for international freelance platforms.
 ## LinkedIn Headline
 
 ```
-Python Automation & AI Integration Developer | Django Business Systems | Workflow Automation for Small Businesses | Open to Freelance Projects
+Python Automation & AI Solutions Developer | Django Business Systems | Workflow Automation for Small Businesses
 ```
 
 ---
@@ -15,7 +15,7 @@ Python Automation & AI Integration Developer | Django Business Systems | Workflo
 ## Upwork Profile Title
 
 ```
-Python Automation & AI Developer | Django | Business Workflow Solutions
+Python Automation & AI Solutions Developer | Django | Workflow Automation
 ```
 
 ---
