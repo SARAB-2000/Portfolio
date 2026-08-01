@@ -202,15 +202,15 @@ class PortfolioData {
     name: 'Ali Baziar',
     role: L(
       'Python Automation & AI Integration Developer',
-      'توسعه‌دهنده Python — اتوماسیون و یکپارچه‌سازی AI',
+      'توسعه‌دهنده پایتون | اتوماسیون و یکپارچه‌سازی هوش مصنوعی',
     ),
     tagline: L(
       'I help small businesses replace manual work with reliable Python systems — AI integrations, Django backends, and workflow automation that save time and reduce errors.',
-      'به کسب‌وکارهای کوچک کمک می‌کنم کارهای دستی را با سیستم‌های Python قابل اعتماد جایگزین کنند — یکپارچه‌سازی AI، بک‌اند Django و اتوماسیون گردش کار.',
+      'به کسب‌وکارهای کوچک کمک می‌کنم کارهای دستی را با سامانه‌های پایتون جایگزین کنند؛ از یکپارچه‌سازی هوش مصنوعی و بک‌اند جنگو تا خودکارسازی فرآیندها.',
     ),
     bio: L(
       'I\'m Ali Baziar, a Python developer focused on practical business solutions — not generic app development.\n\nOver the past several years, I\'ve built production systems for real companies: inventory tracking from factory floor to warehouse, digital approval workflows that replaced paper forms, AI-powered learning platforms, and desktop automation tools that connect Excel, barcode scanners, and industrial printers.\n\nI work best with small business owners and startup founders who need someone reliable to take a messy manual process and turn it into a working system. I communicate clearly in English, provide regular updates, and deliver on agreed scope — whether the project is a \$100 automation script or a multi-month Django application.\n\nIf you\'re losing time to spreadsheets, repetitive data entry, or disconnected tools, I can help you build something that actually runs your business smoother.',
-      'من علی بازيار هستم، توسعه‌دهنده Python با تمرکز بر راه‌حل‌های عملی کسب‌وکار — نه توسعه اپلیکیشن عمومی.\n\nدر چند سال گذشته برای شرکت‌های واقعی سیستم عملیاتی ساخته‌ام: رهگیری موجودی از خط تولید تا انبار، گردش کار تأیید دیجیتال به‌جای فرم کاغذی، پلتفرم یادگیری AI و ابزارهای اتوماسیون دسکتاپ که Excel، اسکنر بارکد و پرینتر صنعتی را به هم وصل می‌کنند.\n\nبا صاحبان کسب‌وکار کوچک و بنیان‌گذاران استارتاپ که به یک نفر قابل اعتماد برای تبدیل فرآیند دستی به سیستم کارآمد نیاز دارند، بهترین نتیجه را می‌گیرم. به انگلیسی شفاف ارتباط می‌گیرم، به‌روزرسانی منظم می‌دهم و طبق scope توافق‌شده تحویل می‌دهم.\n\nاگر وقت خود را با Excel، ورود داده تکراری یا ابزارهای جدا از هم از دست می‌دهید، می‌توانم کمک کنم کاری بسازید که واقعاً کسب‌وکار را روان‌تر کند.',
+      'من علی بازیار هستم؛ توسعه‌دهنده پایتون با تمرکز بر ساخت راه‌حل‌های کاربردی برای کسب‌وکارها.\n\nدر سال‌های اخیر برای شرکت‌های مختلف سامانه‌های عملیاتی طراحی و پیاده‌سازی کرده‌ام؛ از رهگیری کالا در خط تولید و انبار گرفته تا جایگزین کردن فرم‌های کاغذی با گردش کار دیجیتال، ساخت پلتفرم آموزشی مبتنی بر هوش مصنوعی، و ابزارهای خودکارسازی که اکسل، بارکدخوان و چاپگر صنعتی را به هم متصل می‌کنند.\n\nبیشتر با صاحبان کسب‌وکارهای کوچک و تیم‌های نوپا کار می‌کنم؛ کسانی که به فردی قابل‌اعتماد نیاز دارند تا فرآیندهای دستی و پراکنده‌شان را به یک سیستم منسجم تبدیل کند. در طول پروژه به‌صورت منظم گزارش می‌دهم، محدوده کار را از ابتدا شفاف می‌کنم و طبق همان چارچوب تحویل می‌دهم.\n\nاگر زیاد وقتتان صرف اکسل، ورود اطلاعات تکراری یا هماهنگی بین چند ابزار جدا می‌شود، می‌توانیم با هم راه‌حلی بسازیم که واقعاً کار شما را ساده‌تر کند.',
     ),
     email: 'alibaziar1378@gmail.com',
     location: L('Iran · Remote worldwide', 'ایران · دورکاری بین‌المللی'),
@@ -252,21 +252,21 @@ class PortfolioData {
   static const workHighlights = [
     L(
       'Clear scope and fixed price before starting',
-      'scope شفاف و قیمت ثابت قبل از شروع',
+      'محدوده کار و قیمت مشخص قبل از شروع پروژه',
     ),
     L(
       'Regular updates in plain English',
-      'به‌روزرسانی منظم به زبان ساده',
+      'گزارش‌دهی منظم و شفاف در طول همکاری',
     ),
     L(
       'Small projects welcome — from \$50 automation scripts',
-      'پروژه‌های کوچک هم پذیرفته می‌شود — از اسکریپت \$50',
+      'پذیرش پروژه‌های کوچک — از اسکریپت‌های ساده خودکارسازی',
     ),
   ];
 
   static const pricingNote = L(
     'Starting from \$50 for focused automation tasks · Fixed price · Clear scope · Documentation included',
-    'شروع از \$50 برای اتوماسیون متمرکز · قیمت ثابت · scope مشخص · همراه مستندات',
+    'شروع از ۵۰ دلار برای پروژه‌های خودکارسازی · قیمت ثابت · محدوده کار مشخص · همراه با مستندات',
   );
 
   static List<ProjectItem> get orderedProjects {

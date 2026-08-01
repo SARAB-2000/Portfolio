@@ -9,7 +9,7 @@ class AppLocalizationsFa extends AppLocalizations {
   AppLocalizationsFa([String locale = 'fa']) : super(locale);
 
   @override
-  String get appTitle => 'علی بازيار';
+  String get appTitle => 'علی بازیار';
 
   @override
   String get navHome => 'خانه';
@@ -58,14 +58,14 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get sectionAboutSubtitle =>
-      'توسعه‌دهنده Python متمرکز بر کسب‌وکار برای تیم‌های کوچک و استارتاپ';
+      'توسعه‌دهنده پایتون با نگاه کسب‌وکارمحور، برای تیم‌های کوچک و استارتاپ‌ها';
 
   @override
   String get sectionServices => 'خدمات';
 
   @override
   String get sectionServicesSubtitle =>
-      'بسته‌های fixed-scope برای کسب‌وکارهای کوچک و استارتاپ';
+      'بسته‌های مشخص و قابل‌برآورد برای کسب‌وکارهای کوچک و استارتاپ‌ها';
 
   @override
   String get servicesCta => 'شروع گفتگو';
