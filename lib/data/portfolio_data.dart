@@ -263,7 +263,7 @@ class PortfolioData {
     ),
     HeroStatItem(
       value: 24,
-      label: L('Hour Reply Time', 'ساعت تا پاسخ'),
+      label: L('Hour Reply Time', 'پاسخگویی 24 ساعته'),
       icon: Icons.schedule_rounded,
       showPlus: false,
     ),
